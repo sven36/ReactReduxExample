@@ -95,3 +95,51 @@ li{
 .hover{
     background: #f10215;
 }
+.gameData{
+    width: 1200px;
+    margin: 0 auto;
+}
+.data-title{
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 45px 0 0 20px;
+    color: #3e5b51;
+}
+.data-title font{
+    font-size: 18px;
+    color: #aaa;
+    font-weight: normal;
+    padding: 0 8px;
+}
+.data-chapter{
+    background: url(/assets/src/images/story_index_bg.jpg);
+    width: 100%;
+    height: 400px;
+}
+.data-chapter ul{
+    float: left;
+    padding: 30px 60px 0 30px;
+    width: 130px;
+}
+.data-chapter li{
+    font-size: 16px;
+    margin: 35px 0;
+    font-weight: 700;
+    padding-left: 20px;
+    cursor: pointer;
+    text-align: left;
+    height: 40px;
+    line-height: 40px;
+}
+.active{
+    color: #93D3F9;
+    background: url(/assets/src/images/Selected.png);
+}
+.data-character{
+    position: relative;
+    float: left;
+    width: 100%;
+}
+

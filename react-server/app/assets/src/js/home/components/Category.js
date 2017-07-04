@@ -38,7 +38,6 @@ class Category extends Component {
         clearInterval(this.imgSlider);
     }
     componentDidMount() {
-        console.log('didm');
         this.start();
     }
     render() {

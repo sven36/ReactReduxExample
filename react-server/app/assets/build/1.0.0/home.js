@@ -64,6 +64,10 @@
 	
 	var _Category2 = _interopRequireDefault(_Category);
 	
+	var _GameData = __webpack_require__(287);
+	
+	var _GameData2 = _interopRequireDefault(_GameData);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var appEle = document.getElementById('homePage');
@@ -73,12 +77,9 @@
 	    { className: "container" },
 	    _react2.default.createElement(_Top2.default, { style: 'nav-top', style2: 'fl_right' }),
 	    _react2.default.createElement(_Header2.default, { style: 'c' }),
-	    _react2.default.createElement(_Category2.default, null)
+	    _react2.default.createElement(_Category2.default, null),
+	    _react2.default.createElement(_GameData2.default, null)
 	), appEle);
-	
-	// const microdata = JSON.parse(appEle.getAttribute('data-microdata'));
-	// let mydata = JSON.parse(appEle.getAttribute('data-mydata'));
-	// mydata.nick += ', then client reRender ';
 
 /***/ }),
 /* 1 */
@@ -26511,7 +26512,6 @@
 	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            console.log('didm');
 	            this.start();
 	        }
 	    }, {
@@ -26837,6 +26837,218 @@
 	}(_react.Component);
 	
 	exports.default = Category_Slider;
+
+/***/ }),
+/* 287 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _getPrototypeOf = __webpack_require__(169);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(181);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(182);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(186);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(211);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _GameDataChapter = __webpack_require__(288);
+	
+	var _GameDataChapter2 = _interopRequireDefault(_GameDataChapter);
+	
+	var _GameDataCharacter = __webpack_require__(289);
+	
+	var _GameDataCharacter2 = _interopRequireDefault(_GameDataCharacter);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GameData = function (_Component) {
+	  (0, _inherits3.default)(GameData, _Component);
+	
+	  function GameData() {
+	    (0, _classCallCheck3.default)(this, GameData);
+	    return (0, _possibleConstructorReturn3.default)(this, (GameData.__proto__ || (0, _getPrototypeOf2.default)(GameData)).apply(this, arguments));
+	  }
+	
+	  (0, _createClass3.default)(GameData, [{
+	    key: 'render',
+	    value: function render() {
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'gameData' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'data-title' },
+	          '\u6E38\u620F\u8D44\u6599',
+	          _react2.default.createElement(
+	            'font',
+	            null,
+	            'DATA'
+	          ),
+	          ' '
+	        ),
+	        _react2.default.createElement(_GameDataChapter2.default, null),
+	        _react2.default.createElement(_GameDataCharacter2.default, null)
+	      );
+	    }
+	  }]);
+	  return GameData;
+	}(_react.Component);
+	
+	GameData.propTypes = {
+	  microdata: _react.PropTypes.object,
+	  mydata: _react.PropTypes.object
+	};
+	exports.default = GameData;
+
+/***/ }),
+/* 288 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _getPrototypeOf = __webpack_require__(169);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(181);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(182);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(186);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(211);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _UL = __webpack_require__(282);
+	
+	var _UL2 = _interopRequireDefault(_UL);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GameDataChapter = function (_Component) {
+	  (0, _inherits3.default)(GameDataChapter, _Component);
+	
+	  function GameDataChapter() {
+	    (0, _classCallCheck3.default)(this, GameDataChapter);
+	    return (0, _possibleConstructorReturn3.default)(this, (GameDataChapter.__proto__ || (0, _getPrototypeOf2.default)(GameDataChapter)).apply(this, arguments));
+	  }
+	
+	  (0, _createClass3.default)(GameDataChapter, [{
+	    key: 'render',
+	    value: function render() {
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'data-chapter' },
+	        _react2.default.createElement(_UL2.default, { content: ["夜阑卧听风吹雨", "铁马冰河入梦来", "梦里不知身是客", "一晌贪欢"] })
+	      );
+	    }
+	  }]);
+	  return GameDataChapter;
+	}(_react.Component);
+	
+	GameDataChapter.propTypes = {
+	  microdata: _react.PropTypes.object,
+	  mydata: _react.PropTypes.object
+	};
+	exports.default = GameDataChapter;
+
+/***/ }),
+/* 289 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _getPrototypeOf = __webpack_require__(169);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(181);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(182);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(186);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(211);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GameDataCharacter = function (_Component) {
+	  (0, _inherits3.default)(GameDataCharacter, _Component);
+	
+	  function GameDataCharacter() {
+	    (0, _classCallCheck3.default)(this, GameDataCharacter);
+	    return (0, _possibleConstructorReturn3.default)(this, (GameDataCharacter.__proto__ || (0, _getPrototypeOf2.default)(GameDataCharacter)).apply(this, arguments));
+	  }
+	
+	  (0, _createClass3.default)(GameDataCharacter, [{
+	    key: "render",
+	    value: function render() {
+	
+	      return _react2.default.createElement("div", { className: "data-character" });
+	    }
+	  }]);
+	  return GameDataCharacter;
+	}(_react.Component);
+	
+	GameDataCharacter.propTypes = {
+	  microdata: _react.PropTypes.object,
+	  mydata: _react.PropTypes.object
+	};
+	exports.default = GameDataCharacter;
 
 /***/ })
 /******/ ]);
