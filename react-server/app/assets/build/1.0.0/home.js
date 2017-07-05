@@ -26876,10 +26876,6 @@
 	
 	var _GameDataChapter2 = _interopRequireDefault(_GameDataChapter);
 	
-	var _GameDataCharacter = __webpack_require__(289);
-	
-	var _GameDataCharacter2 = _interopRequireDefault(_GameDataCharacter);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var GameData = function (_Component) {
@@ -26908,8 +26904,7 @@
 	          ),
 	          ' '
 	        ),
-	        _react2.default.createElement(_GameDataChapter2.default, null),
-	        _react2.default.createElement(_GameDataCharacter2.default, null)
+	        _react2.default.createElement(_GameDataChapter2.default, null)
 	      );
 	    }
 	  }]);
@@ -26960,6 +26955,10 @@
 	
 	var _UL2 = _interopRequireDefault(_UL);
 	
+	var _GameDataCharacter = __webpack_require__(289);
+	
+	var _GameDataCharacter2 = _interopRequireDefault(_GameDataCharacter);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var GameDataChapter = function (_Component) {
@@ -26977,7 +26976,12 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'data-chapter' },
-	        _react2.default.createElement(_UL2.default, { content: ["夜阑卧听风吹雨", "铁马冰河入梦来", "梦里不知身是客", "一晌贪欢"] })
+	        _react2.default.createElement(_UL2.default, { content: ["夜阑卧听风吹雨", "铁马冰河入梦来", "梦里不知身是客", "一晌贪欢"] }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'chapter-list' },
+	          _react2.default.createElement(_GameDataCharacter2.default, null)
+	        )
 	      );
 	    }
 	  }]);
@@ -26994,7 +26998,7 @@
 /* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -27024,6 +27028,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _CharacterInfo = __webpack_require__(290);
+	
+	var _CharacterInfo2 = _interopRequireDefault(_CharacterInfo);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var GameDataCharacter = function (_Component) {
@@ -27035,10 +27043,14 @@
 	  }
 	
 	  (0, _createClass3.default)(GameDataCharacter, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
-	
-	      return _react2.default.createElement("div", { className: "data-character" });
+	      var contentInfo = ["傅剑寒|无师自通的剑术奇才，无意中得到一本兵书从其中兵法创出一套剑法，名为杂烩剑法，为人豪迈，讲义气，爱好喝酒。|/assets/src/images/character_2.png", "谷月轩|“辽东大侠”谷云飞之子，逍遥谷第四代大弟子，为人端方斯文，一身正气！因内功精纯，无瑕子多传其拳法功夫！|/assets/src/images/character_3.png", "荆棘|逍遥谷第四代二弟子，个性倨傲，容易冲动!典型的刀子嘴豆腐心！双手分使刀剑，潜力惊人！|/assets/src/images/character_4.png", "水盼盼|峨嵋派弟子，为了寻找丢失的本派武功至宝下山。之前从未与男性打过交道，所以与众人闹出了许多笑话。|/assets/src/images/character_6.png"];
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'data-character' },
+	        _react2.default.createElement(_CharacterInfo2.default, { content: contentInfo })
+	      );
 	    }
 	  }]);
 	  return GameDataCharacter;
@@ -27049,6 +27061,75 @@
 	  mydata: _react.PropTypes.object
 	};
 	exports.default = GameDataCharacter;
+
+/***/ }),
+/* 290 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _getPrototypeOf = __webpack_require__(169);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(181);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(182);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(186);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(211);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var CharacterInfo = function (_Component) {
+	    (0, _inherits3.default)(CharacterInfo, _Component);
+	
+	    function CharacterInfo() {
+	        (0, _classCallCheck3.default)(this, CharacterInfo);
+	        return (0, _possibleConstructorReturn3.default)(this, (CharacterInfo.__proto__ || (0, _getPrototypeOf2.default)(CharacterInfo)).apply(this, arguments));
+	    }
+	
+	    (0, _createClass3.default)(CharacterInfo, [{
+	        key: "render",
+	        value: function render() {
+	            var content = this.props.content;
+	            var childs = "";
+	            content.map(function (item) {
+	                childs += "<div class=\"character-info-con\">";
+	                childs += "<h3>" + item.split('|')[0] + "</h3>";
+	                childs += "<p>" + item.split('|')[1] + "</p>";
+	                childs += "<a>查看更多+</a>";
+	                childs += "<img src=\"" + item.split('|')[2] + "\"/>";
+	                childs += "</div>";
+	            });
+	            return _react2.default.createElement("div", { className: "character-info", dangerouslySetInnerHTML: { __html: childs } });
+	        }
+	    }]);
+	    return CharacterInfo;
+	}(_react.Component);
+	
+	CharacterInfo.propTypes = {
+	    microdata: _react.PropTypes.object,
+	    mydata: _react.PropTypes.object
+	};
+	exports.default = CharacterInfo;
 
 /***/ })
 /******/ ]);

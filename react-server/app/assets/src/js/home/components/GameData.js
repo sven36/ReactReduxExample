@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import GameDataChapter from './GameDataChapter.js';
-import GameDataCharacter from './GameDataCharacter.js';
 
 
 class GameData extends Component {
@@ -15,7 +14,6 @@ class GameData extends Component {
       <div className="gameData">
           <div className="data-title">游戏资料<font>DATA</font> </div>
           <GameDataChapter />
-          <GameDataCharacter />
       </div>
     );
   }

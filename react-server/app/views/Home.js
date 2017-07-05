@@ -5,7 +5,10 @@ import Header from '../assets/src/js/home/components/Header.js';
 import Category from '../assets/src/js/home/components/Category.js';
 import GameData from '../assets/src/js/home/components/GameData.js';
 import Default from './layout/Default';
+
 import {Provider} from 'react-redux';
+import configureStore from '../redux/configureStore';
+const store=configureStore();
 
 class Home extends Component {
   static propTypes = {
@@ -18,26 +21,18 @@ class Home extends Component {
     let scriptUrls = [homeJs];
 
     return (
-      <Default
-        microdata={microdata}
-        scriptUrls={scriptUrls}
-        title={"I Have A Dream"}>
+      <Default  microdata={microdata}  scriptUrls={scriptUrls}  title={"I Have A Dream"}>
+        <Provider store={store}>
         <div id="homePage">
-          <div>
           <Top style="nav-top" style2="fl_right" />
           <Header style="c" />
           <Category />
           <GameData />
-          </div>
         </div>
+        </Provider>
       </Default >
     );
   }
 };
-/*<div id="demoApp"
-  data-microdata={JSON.stringify(microdata)}
-  data-mydata={JSON.stringify(mydata)}> 
-  <Content mydata={mydata} microdata={microdata} />
-</div>*/
 
 module.exports = Home;
