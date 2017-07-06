@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux';
-import GameDataRedux from './components/GameDataRedux.js';
+import GameDataChapterRedux from './components/GameDataChapterRedux.js';
 
-export default combineReducers({GameDataRedux});
+export default combineReducers({GameDataChapterRedux});

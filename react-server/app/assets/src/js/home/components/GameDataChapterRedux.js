@@ -1,14 +1,14 @@
 const ChapterListFilter={
-    Character:"Character",
-    Story:"Story",
-    School:"School",
+    Character:"0$LI",
+    Story:"1$LI",
+    School:"2$LI",
 };
 
 const initialState={
     ChapterListFilter:ChapterListFilter.Character,
     visible:false
 }
-export function FilterAction(filter){
+export function filterAction(filter){
     return {
         type:"SetVisibleFilter",filter
     }

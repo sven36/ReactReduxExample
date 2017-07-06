@@ -7,8 +7,8 @@ import GameData from '../assets/src/js/home/components/GameData.js';
 import Default from './layout/Default';
 
 import {Provider} from 'react-redux';
-import configureStore from '../redux/configureStore';
-const store=configureStore();
+import configureStore from '../assets/src/js/redux/configureStore';
+const store=configureStore;
 
 class Home extends Component {
   static propTypes = {
