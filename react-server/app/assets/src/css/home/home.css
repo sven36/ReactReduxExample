@@ -120,8 +120,9 @@ li{
 }
 .data-chapter ul{
     float: left;
-    padding: 30px 60px 0 10px;
+    padding:0 60px 0 10px;
     width: 170px;
+    margin-top: 0;
 }
 .data-chapter li{
     font-size: 20px;
@@ -134,7 +135,7 @@ li{
     line-height: 40px;
     color: #fff;
 }
-.active{
+.data-chapter li.active{
     color: #93D3F9;
     background: url(/assets/src/images/Selected.png) no-repeat left;
 }

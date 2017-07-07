@@ -43,7 +43,7 @@ class Category extends Component {
     render() {
         return (
             <div id="category">
-                <UL content={['对酒当歌', '人生几何', '譬如朝露', '去日苦多', '慨当以慷', '忧思难忘']} />
+                <UL id={"category_list"} content={['对酒当歌', '人生几何', '譬如朝露', '去日苦多', '慨当以慷', '忧思难忘']} />
                 <Category_Banner style={"banner"} imgList={imgLists} change={this.SliderChange} index={this.state.index} />
                 <Category_Slider count={length} style={"slider"} pause={this.SliderPause} change={this.SliderChange} index={this.state.index} />
             </div>

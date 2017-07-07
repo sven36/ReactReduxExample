@@ -3,14 +3,15 @@ import { Link, IndexLink } from 'react-router';
 
 class LI extends Component{
     render(){
-        let event;
+        let{event,action,id,filter,style}=this.props;
         if(this.props.action){
             event=this.props.action.filterAction;
         }
-        let id=this.props.id;
-        let filter=this.props.filter ?this.props.filter:"";
+        if(filter){
+            style=filter==id? 'active':'';
+        }
         return(
-            <li id={id} className={this.props.style+' '+filter==id ?'active':''} onClick={event ? event(this.props.id):''}>
+            <li id={id} className={style} onClick={event ? event(id):''}>
                 {this.props.content}
             </li>
         );

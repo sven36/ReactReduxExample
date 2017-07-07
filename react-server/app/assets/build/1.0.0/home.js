@@ -26532,7 +26532,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { id: 'category' },
-	                _react2.default.createElement(_UL2.default, { content: ['对酒当歌', '人生几何', '譬如朝露', '去日苦多', '慨当以慷', '忧思难忘'] }),
+	                _react2.default.createElement(_UL2.default, { id: "category_list", content: ['对酒当歌', '人生几何', '譬如朝露', '去日苦多', '慨当以慷', '忧思难忘'] }),
 	                _react2.default.createElement(_Category_Banner2.default, { style: "banner", imgList: imgLists, change: this.SliderChange, index: this.state.index }),
 	                _react2.default.createElement(_Category_Slider2.default, { count: length, style: "slider", pause: this.SliderPause, change: this.SliderChange, index: this.state.index })
 	            );
@@ -26597,22 +26597,24 @@
 	        key: 'render',
 	        value: function render() {
 	            var _props = this.props,
+	                id = _props.id,
 	                content = _props.content,
 	                filter = _props.filter,
-	                action = _props.action;
+	                action = _props.action,
+	                style = _props.style;
 	
 	            var li = [];
 	            var key = 0;
 	            if (Array.isArray(content)) {
 	                content.map(function (item) {
-	                    li.push(_react2.default.createElement(_LI2.default, { key: key++ + '$LI', id: key++ + '$LI', content: item, filter: filter, action: action }));
+	                    li.push(_react2.default.createElement(_LI2.default, { key: key++ + id + '$LI', id: id + key, content: item, filter: filter, action: action }));
 	                });
 	            } else {
-	                li.push(_react2.default.createElement(_LI2.default, { key: key++ + '$LI', id: key++ + '$LI', content: content, filter: filter, action: action }));
+	                li.push(_react2.default.createElement(_LI2.default, { key: key++ + id + '$LI', id: id + key, content: content, filter: filter, action: action }));
 	            }
 	            return _react2.default.createElement(
 	                'ul',
-	                { id: this.props.id, className: this.props.style },
+	                { id: id, className: style },
 	                li
 	            );
 	        }
@@ -26671,15 +26673,22 @@
 	    (0, _createClass3.default)(LI, [{
 	        key: 'render',
 	        value: function render() {
-	            var event = void 0;
+	            var _props = this.props,
+	                event = _props.event,
+	                action = _props.action,
+	                id = _props.id,
+	                filter = _props.filter,
+	                style = _props.style;
+	
 	            if (this.props.action) {
 	                event = this.props.action.filterAction;
 	            }
-	            var id = this.props.id;
-	            var filter = this.props.filter ? this.props.filter : "";
+	            if (filter) {
+	                style = filter == id ? 'active' : '';
+	            }
 	            return _react2.default.createElement(
 	                'li',
-	                { id: id, className: this.props.style + ' ' + filter == id ? 'active' : '', onClick: event ? event(this.props.id) : '' },
+	                { id: id, className: style, onClick: event ? event(id) : '' },
 	                this.props.content
 	            );
 	        }
@@ -27004,7 +27013,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'data-chapter' },
-	        _react2.default.createElement(_UL2.default, { action: this.props.actions, filter: this.props.filter, content: ["夜阑卧听风吹雨铁马冰河入梦来", "梦里不知身是客一晌贪欢"] }),
+	        _react2.default.createElement(_UL2.default, { id: "chapter_list", action: this.props.actions, filter: this.props.filter, content: ["夜阑卧听风吹雨", "铁马冰河入梦来", "梦里不知身是客", "一晌贪欢"] }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'chapter-list' },
@@ -27015,17 +27024,7 @@
 	  }]);
 	  return GameDataChapter;
 	}(_react.Component);
-	// function select(state){
-	// return{
-	//  filter:state.ChapterListFilter
-	// }
-	// }
 	
-	
-	GameDataChapter.propTypes = {
-	  microdata: _react.PropTypes.object,
-	  mydata: _react.PropTypes.object
-	};
 	exports.default = (0, _reactRedux.connect)(function (state) {
 	  return {
 	    filter: state.ChapterListFilter
@@ -33868,6 +33867,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	exports.initialState = exports.ChapterListFilter = undefined;
 	
 	var _assign = __webpack_require__(374);
 	
@@ -33878,13 +33878,13 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var ChapterListFilter = {
-	    Character: "0$LI",
-	    Story: "1$LI",
-	    School: "2$LI"
+	var ChapterListFilter = exports.ChapterListFilter = {
+	    Character: "chapter_list1",
+	    Story: "chapter_list2",
+	    School: "chapter_list3"
 	};
 	
-	var initialState = {
+	var initialState = exports.initialState = {
 	    ChapterListFilter: ChapterListFilter.Character,
 	    visible: false
 	};
@@ -33899,6 +33899,7 @@
 	
 	    switch (action.type) {
 	        case "SetVisibleFilter":
+	            console.log('ccccc');
 	            return (0, _assign2.default)({}, state, { ChapterListFilter: action.filter });
 	        default:
 	            return state;
@@ -34133,33 +34134,13 @@
 	
 	var _redux = __webpack_require__(336);
 	
-	var _HomeRedux = __webpack_require__(383);
-	
-	var _HomeRedux2 = _interopRequireDefault(_HomeRedux);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = (0, _redux.createStore)(_HomeRedux2.default);
-
-/***/ }),
-/* 383 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _redux = __webpack_require__(336);
-	
 	var _GameDataChapterRedux = __webpack_require__(373);
 	
 	var _GameDataChapterRedux2 = _interopRequireDefault(_GameDataChapterRedux);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = (0, _redux.combineReducers)({ GameDataChapterRedux: _GameDataChapterRedux2.default });
+	exports.default = (0, _redux.createStore)(_GameDataChapterRedux2.default);
 
 /***/ })
 /******/ ]);
