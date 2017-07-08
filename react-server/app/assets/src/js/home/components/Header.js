@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { Link, IndexLink } from 'react-router';
-class Header extends Component{
-    render(){
+const Header =(props)=> {
         return(
-            <div id="header" className={this.props.style}>
+            <div id="header" className={props.style}>
                 <img src="/assets/src/images/logo.png" />
             </div>
         );
-    }
 }
 export default Header;

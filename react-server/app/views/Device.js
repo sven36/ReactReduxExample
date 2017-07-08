@@ -16,7 +16,7 @@ class Device extends Component {
 
   render() {
     const { microdata, mydata, isServer } = this.props;
-    let deviceJs = `${microdata.styleDomain}/build/${microdata.styleVersion}/device.js`;
+    let deviceJs = `${microdata.styleDomain}build/${microdata.styleVersion}/device.js`;
     let scriptUrls = [deviceJs];
 
     return (

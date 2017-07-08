@@ -6,9 +6,9 @@ import Category from '../assets/src/js/home/components/Category.js';
 import GameData from '../assets/src/js/home/components/GameData.js';
 import Default from './layout/Default';
 
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import configureStore from '../assets/src/js/redux/configureStore';
-const store=configureStore;
+const store = configureStore;
 
 class Home extends Component {
   static propTypes = {
@@ -21,15 +21,17 @@ class Home extends Component {
     let scriptUrls = [homeJs];
 
     return (
-      <Default  microdata={microdata}  scriptUrls={scriptUrls}  title={"I Have A Dream"}>
-        <Provider store={store}>
+      <Default microdata={microdata} scriptUrls={scriptUrls} title={"I Have A Dream"}>
         <div id="homePage">
-          <Top style="nav-top" style2="fl_right" />
-          <Header style="c" />
-          <Category />
-          <GameData />
+          <Provider store={store}>
+            <div className={"container"}>
+              <Top style="nav-top" style2="fl_right" />
+              <Header style="c" />
+              <Category />
+              <GameData />
+            </div>
+          </Provider>
         </div>
-        </Provider>
       </Default >
     );
   }

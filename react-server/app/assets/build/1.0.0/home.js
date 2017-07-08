@@ -70,7 +70,7 @@
 	
 	var _reactRedux = __webpack_require__(289);
 	
-	var _configureStore = __webpack_require__(380);
+	var _configureStore = __webpack_require__(383);
 	
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 	
@@ -26276,26 +26276,6 @@
 	    value: true
 	});
 	
-	var _getPrototypeOf = __webpack_require__(169);
-	
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-	
-	var _classCallCheck2 = __webpack_require__(181);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(182);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(186);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(211);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -26304,124 +26284,74 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Top = function (_Component) {
-	    (0, _inherits3.default)(Top, _Component);
-	
-	    function Top() {
-	        (0, _classCallCheck3.default)(this, Top);
-	        return (0, _possibleConstructorReturn3.default)(this, (Top.__proto__ || (0, _getPrototypeOf2.default)(Top)).apply(this, arguments));
-	    }
-	
-	    (0, _createClass3.default)(Top, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { className: this.props.style },
+	var Top = function Top(props) {
+	    return _react2.default.createElement(
+	        'div',
+	        { className: props.style },
+	        _react2.default.createElement(
+	            'h1',
+	            null,
+	            _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '#', className: 'red' },
+	                '\u8BF7\u767B\u5F55'
+	            )
+	        ),
+	        _react2.default.createElement(
+	            'ul',
+	            { className: props.style2 },
+	            _react2.default.createElement(
+	                'li',
+	                null,
 	                _react2.default.createElement(
-	                    'h1',
-	                    null,
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '192.168.0.79:8630', className: 'red' },
-	                        '\u8BF7\u767B\u5F55'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'ul',
-	                    { className: this.props.style2 },
-	                    _react2.default.createElement(
-	                        'li',
-	                        null,
-	                        _react2.default.createElement(
-	                            _reactRouter.Link,
-	                            { to: 'https://es.fesco.com.cn/Esvr/Home/MasterPage?source=%2fEsvr%2fOnlineAppointment%2fLeaveWordForm' },
-	                            '\u4F7F\u7528\u5E2E\u52A9'
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'li',
-	                        null,
-	                        '|'
-	                    ),
-	                    _react2.default.createElement(
-	                        'li',
-	                        null,
-	                        '\u7F51\u4E0A\u5BA2\u670D'
-	                    ),
-	                    _react2.default.createElement(
-	                        'li',
-	                        null,
-	                        '|'
-	                    )
+	                    _reactRouter.Link,
+	                    { to: '#' },
+	                    '\u4F7F\u7528\u5E2E\u52A9'
 	                )
-	            );
-	        }
-	    }]);
-	    return Top;
-	}(_react.Component);
-	
+	            ),
+	            _react2.default.createElement(
+	                'li',
+	                null,
+	                '|'
+	            ),
+	            _react2.default.createElement(
+	                'li',
+	                null,
+	                '\u7F51\u4E0A\u5BA2\u670D'
+	            ),
+	            _react2.default.createElement(
+	                'li',
+	                null,
+	                '|'
+	            )
+	        )
+	    );
+	};
 	exports.default = Top;
 
 /***/ }),
 /* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	
-	var _getPrototypeOf = __webpack_require__(169);
-	
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-	
-	var _classCallCheck2 = __webpack_require__(181);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(182);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(186);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(211);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactRouter = __webpack_require__(218);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Header = function (_Component) {
-	    (0, _inherits3.default)(Header, _Component);
-	
-	    function Header() {
-	        (0, _classCallCheck3.default)(this, Header);
-	        return (0, _possibleConstructorReturn3.default)(this, (Header.__proto__ || (0, _getPrototypeOf2.default)(Header)).apply(this, arguments));
-	    }
-	
-	    (0, _createClass3.default)(Header, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { id: 'header', className: this.props.style },
-	                _react2.default.createElement('img', { src: '/assets/src/images/logo.png' })
-	            );
-	        }
-	    }]);
-	    return Header;
-	}(_react.Component);
-	
+	var Header = function Header(props) {
+	    return _react2.default.createElement(
+	        "div",
+	        { id: "header", className: props.style },
+	        _react2.default.createElement("img", { src: "/assets/src/images/logo.png" })
+	    );
+	};
 	exports.default = Header;
 
 /***/ }),
@@ -26553,31 +26483,9 @@
 	    value: true
 	});
 	
-	var _getPrototypeOf = __webpack_require__(169);
-	
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-	
-	var _classCallCheck2 = __webpack_require__(181);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(182);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(186);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(211);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(218);
 	
 	var _LI = __webpack_require__(283);
 	
@@ -26585,43 +26493,28 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var UL = function (_Component) {
-	    (0, _inherits3.default)(UL, _Component);
+	var UL = function UL(props) {
+	    var id = props.id,
+	        content = props.content,
+	        filter = props.filter,
+	        action = props.action,
+	        style = props.style;
 	
-	    function UL() {
-	        (0, _classCallCheck3.default)(this, UL);
-	        return (0, _possibleConstructorReturn3.default)(this, (UL.__proto__ || (0, _getPrototypeOf2.default)(UL)).apply(this, arguments));
+	    var li = [];
+	    var key = 0;
+	    if (Array.isArray(content)) {
+	        content.map(function (item) {
+	            li.push(_react2.default.createElement(_LI2.default, { key: key++ + id + '$LI', id: id + key, content: item, filter: filter, action: action }));
+	        });
+	    } else {
+	        li.push(_react2.default.createElement(_LI2.default, { key: key++ + id + '$LI', id: id + key, content: content, filter: filter, action: action }));
 	    }
-	
-	    (0, _createClass3.default)(UL, [{
-	        key: 'render',
-	        value: function render() {
-	            var _props = this.props,
-	                id = _props.id,
-	                content = _props.content,
-	                filter = _props.filter,
-	                action = _props.action,
-	                style = _props.style;
-	
-	            var li = [];
-	            var key = 0;
-	            if (Array.isArray(content)) {
-	                content.map(function (item) {
-	                    li.push(_react2.default.createElement(_LI2.default, { key: key++ + id + '$LI', id: id + key, content: item, filter: filter, action: action }));
-	                });
-	            } else {
-	                li.push(_react2.default.createElement(_LI2.default, { key: key++ + id + '$LI', id: id + key, content: content, filter: filter, action: action }));
-	            }
-	            return _react2.default.createElement(
-	                'ul',
-	                { id: id, className: style },
-	                li
-	            );
-	        }
-	    }]);
-	    return UL;
-	}(_react.Component);
-	
+	    return _react2.default.createElement(
+	        'ul',
+	        { id: id, className: style },
+	        li
+	    );
+	};
 	exports.default = UL;
 
 /***/ }),
@@ -26634,68 +26527,34 @@
 	    value: true
 	});
 	
-	var _getPrototypeOf = __webpack_require__(169);
-	
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-	
-	var _classCallCheck2 = __webpack_require__(181);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(182);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(186);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(211);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactRouter = __webpack_require__(218);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var LI = function (_Component) {
-	    (0, _inherits3.default)(LI, _Component);
+	var LI = function LI(props) {
+	    var event = void 0;
+	    var action = props.action,
+	        id = props.id,
+	        filter = props.filter,
+	        style = props.style,
+	        content = props.content;
 	
-	    function LI() {
-	        (0, _classCallCheck3.default)(this, LI);
-	        return (0, _possibleConstructorReturn3.default)(this, (LI.__proto__ || (0, _getPrototypeOf2.default)(LI)).apply(this, arguments));
+	    if (action) {
+	        event = action;
 	    }
-	
-	    (0, _createClass3.default)(LI, [{
-	        key: 'render',
-	        value: function render() {
-	            var _props = this.props,
-	                event = _props.event,
-	                action = _props.action,
-	                id = _props.id,
-	                filter = _props.filter,
-	                style = _props.style;
-	
-	            if (this.props.action) {
-	                event = this.props.action.filterAction;
-	            }
-	            if (filter) {
-	                style = filter == id ? 'active' : '';
-	            }
-	            return _react2.default.createElement(
-	                'li',
-	                { id: id, className: style, onClick: event ? event(id) : '' },
-	                this.props.content
-	            );
-	        }
-	    }]);
-	    return LI;
-	}(_react.Component);
-	
+	    if (filter) {
+	        style = filter == id ? 'active' : '';
+	    }
+	    return _react2.default.createElement(
+	        'li',
+	        { id: id, className: style, onClick: function onClick() {
+	                event ? event(id) : '';
+	            } },
+	        content
+	    );
+	};
 	exports.default = LI;
 
 /***/ }),
@@ -26708,31 +26567,9 @@
 	    value: true
 	});
 	
-	var _getPrototypeOf = __webpack_require__(169);
-	
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-	
-	var _classCallCheck2 = __webpack_require__(181);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(182);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(186);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(211);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(218);
 	
 	var _Img = __webpack_require__(285);
 	
@@ -26740,38 +26577,27 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Category_Banner = function (_Component) {
-	    (0, _inherits3.default)(Category_Banner, _Component);
+	var Category_Banner = function Category_Banner(props) {
+	    var id = props.id,
+	        style = props.style,
+	        imgList = props.imgList,
+	        index = props.index;
 	
-	    function Category_Banner() {
-	        (0, _classCallCheck3.default)(this, Category_Banner);
-	        return (0, _possibleConstructorReturn3.default)(this, (Category_Banner.__proto__ || (0, _getPrototypeOf2.default)(Category_Banner)).apply(this, arguments));
-	    }
-	
-	    (0, _createClass3.default)(Category_Banner, [{
-	        key: 'render',
-	        value: function render() {
-	            var imgList = this.props.imgList;
-	            var index = this.props.index;
-	            var imgs = [];
-	            var key = 0;
-	            if (Array.isArray(imgList)) {
-	                for (key; key < imgList.length; key++) {
-	                    imgs.push(_react2.default.createElement(_Img2.default, { key: key + 'Category_Banner', src: imgList[key], style: key == index ? '' : 'display' }));
-	                }
-	            } else {
-	                imgs.push(_react2.default.createElement(_Img2.default, { key: key++ + 'Category_Banner', src: imgList, style: '' }));
-	            }
-	            return _react2.default.createElement(
-	                'div',
-	                { id: this.props.id, className: this.props.style },
-	                imgs
-	            );
+	    var imgs = [];
+	    var key = 0;
+	    if (Array.isArray(imgList)) {
+	        for (key; key < imgList.length; key++) {
+	            imgs.push(_react2.default.createElement(_Img2.default, { key: key + 'Category_Banner', src: imgList[key], style: key == index ? '' : 'display' }));
 	        }
-	    }]);
-	    return Category_Banner;
-	}(_react.Component);
-	
+	    } else {
+	        imgs.push(_react2.default.createElement(_Img2.default, { key: key++ + 'Category_Banner', src: imgList, style: '' }));
+	    }
+	    return _react2.default.createElement(
+	        'div',
+	        { id: id, className: style },
+	        imgs
+	    );
+	};
 	exports.default = Category_Banner;
 
 /***/ }),
@@ -26805,31 +26631,9 @@
 	    value: true
 	});
 	
-	var _getPrototypeOf = __webpack_require__(169);
-	
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-	
-	var _classCallCheck2 = __webpack_require__(181);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(182);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(186);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(211);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(218);
 	
 	var _Img = __webpack_require__(285);
 	
@@ -26837,36 +26641,27 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var slider = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAAAEgAAABIAEbJaz4AAAAJdnBBZwAAABQAAAAUAKM7KtEAAADISURBVCjPjdI9T8JQFIDhp6cKTRz4mFpmFwz+//9hgk4YJ0sMJiKSlKVxwFo/Au07ndz7TPeeRFvI5SYytcrW2lrdXCbfLHfjyu/2HpTHMf3ic7cG/jYwk3pt4dy1U02FzREWFs41tfMRooPBQoRC1gkzs1B0MsjDuBcch2EvOIz27c8XDr3cIbz3gm/R/GVH61CqOlnlOdSWnXCpTrFzYXqGrTw227NxaXKCPbmngbzYGf3byL07q+OY/DgOhcJIhspWqWy/4xO4VSw4B3jzAwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNS0wOS0zMFQxNjowMTo1NyswODowMCbyI8YAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTUtMDktMzBUMTY6MDE6NTcrMDg6MDBXr5t6AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAABJRU5ErkJggg==';
+	var Category_Slider = function Category_Slider(props) {
+	    var id = props.id,
+	        index = props.index,
+	        style = props.style,
+	        count = props.count,
+	        SliderChange = props.SliderChange,
+	        change = props.change;
 	
-	var Category_Slider = function (_Component) {
-	    (0, _inherits3.default)(Category_Slider, _Component);
-	
-	    function Category_Slider() {
-	        (0, _classCallCheck3.default)(this, Category_Slider);
-	        return (0, _possibleConstructorReturn3.default)(this, (Category_Slider.__proto__ || (0, _getPrototypeOf2.default)(Category_Slider)).apply(this, arguments));
-	    }
-	
-	    (0, _createClass3.default)(Category_Slider, [{
-	        key: 'render',
-	        value: function render() {
-	            var count = this.props.count;
-	            var imgs = [];
-	            if (count > 0) {
-	                for (var key = 0; key < count; key++) {
-	                    imgs.push(_react2.default.createElement(_Img2.default, { id: key + 'Img', key: key + 'Category_Slider', src: slider, style: this.props.index == key ? 'hover' : '', onHover: this.props.SliderChange, onOut: this.props.change }));
-	                }
-	            }
-	            return _react2.default.createElement(
-	                'div',
-	                { id: this.props.id, className: this.props.style },
-	                imgs
-	            );
+	    var slider = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAAAEgAAABIAEbJaz4AAAAJdnBBZwAAABQAAAAUAKM7KtEAAADISURBVCjPjdI9T8JQFIDhp6cKTRz4mFpmFwz+//9hgk4YJ0sMJiKSlKVxwFo/Au07ndz7TPeeRFvI5SYytcrW2lrdXCbfLHfjyu/2HpTHMf3ic7cG/jYwk3pt4dy1U02FzREWFs41tfMRooPBQoRC1gkzs1B0MsjDuBcch2EvOIz27c8XDr3cIbz3gm/R/GVH61CqOlnlOdSWnXCpTrFzYXqGrTw227NxaXKCPbmngbzYGf3byL07q+OY/DgOhcJIhspWqWy/4xO4VSw4B3jzAwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNS0wOS0zMFQxNjowMTo1NyswODowMCbyI8YAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTUtMDktMzBUMTY6MDE6NTcrMDg6MDBXr5t6AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAABJRU5ErkJggg==';
+	    var imgs = [];
+	    if (count > 0) {
+	        for (var key = 0; key < count; key++) {
+	            imgs.push(_react2.default.createElement(_Img2.default, { id: key + 'Img', key: key + 'Category_Slider', src: slider, style: index == key ? 'hover' : '', onHover: SliderChange, onOut: change }));
 	        }
-	    }]);
-	    return Category_Slider;
-	}(_react.Component);
-	
+	    }
+	    return _react2.default.createElement(
+	        'div',
+	        { id: id, className: style },
+	        imgs
+	    );
+	};
 	exports.default = Category_Slider;
 
 /***/ }),
@@ -26876,28 +26671,8 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
-	
-	var _getPrototypeOf = __webpack_require__(169);
-	
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-	
-	var _classCallCheck2 = __webpack_require__(181);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(182);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(186);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(211);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
 	
 	var _react = __webpack_require__(1);
 	
@@ -26909,42 +26684,23 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var GameData = function (_Component) {
-	  (0, _inherits3.default)(GameData, _Component);
-	
-	  function GameData() {
-	    (0, _classCallCheck3.default)(this, GameData);
-	    return (0, _possibleConstructorReturn3.default)(this, (GameData.__proto__ || (0, _getPrototypeOf2.default)(GameData)).apply(this, arguments));
-	  }
-	
-	  (0, _createClass3.default)(GameData, [{
-	    key: 'render',
-	    value: function render() {
-	
-	      return _react2.default.createElement(
+	var GameData = function GameData() {
+	    return _react2.default.createElement(
 	        'div',
 	        { className: 'gameData' },
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'data-title' },
-	          '\u6E38\u620F\u8D44\u6599',
-	          _react2.default.createElement(
-	            'font',
-	            null,
-	            'DATA'
-	          ),
-	          ' '
+	            'div',
+	            { className: 'data-title' },
+	            '\u6E38\u620F\u8D44\u6599',
+	            _react2.default.createElement(
+	                'font',
+	                null,
+	                'DATA'
+	            ),
+	            ' '
 	        ),
 	        _react2.default.createElement(_GameDataChapter2.default, null)
-	      );
-	    }
-	  }]);
-	  return GameData;
-	}(_react.Component);
-	
-	GameData.propTypes = {
-	  microdata: _react.PropTypes.object,
-	  mydata: _react.PropTypes.object
+	    );
 	};
 	exports.default = GameData;
 
@@ -26992,9 +26748,13 @@
 	
 	var _UL2 = _interopRequireDefault(_UL);
 	
-	var _GameDataCharacter = __webpack_require__(378);
+	var _GameDataCharacter = __webpack_require__(379);
 	
 	var _GameDataCharacter2 = _interopRequireDefault(_GameDataCharacter);
+	
+	var _GameDataStory = __webpack_require__(382);
+	
+	var _GameDataStory2 = _interopRequireDefault(_GameDataStory);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -27009,7 +26769,6 @@
 	  (0, _createClass3.default)(GameDataChapter, [{
 	    key: 'render',
 	    value: function render() {
-	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'data-chapter' },
@@ -27017,7 +26776,8 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'chapter-list' },
-	          _react2.default.createElement(_GameDataCharacter2.default, null)
+	          _react2.default.createElement(_GameDataCharacter2.default, { action: this.props.setIndex, filter: this.props.filter, index: this.props.index }),
+	          _react2.default.createElement(_GameDataStory2.default, { filter: this.props.filter })
 	        )
 	      );
 	    }
@@ -27027,11 +26787,13 @@
 	
 	exports.default = (0, _reactRedux.connect)(function (state) {
 	  return {
-	    filter: state.ChapterListFilter
+	    filter: state.ChapterListFilter,
+	    index: state.CharacterIndex
 	  };
 	}, function (dispatch) {
 	  return {
-	    actions: (0, _redux.bindActionCreators)(_GameDataChapterRedux.filterAction, dispatch)
+	    actions: (0, _redux.bindActionCreators)(_GameDataChapterRedux.filterAction, dispatch),
+	    setIndex: (0, _redux.bindActionCreators)(_GameDataChapterRedux.indexAction, dispatch)
 	  };
 	})(GameDataChapter);
 
@@ -33867,13 +33629,14 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.initialState = exports.ChapterListFilter = undefined;
+	exports.initialState = exports.CharacterIndex = exports.ChapterListFilter = undefined;
 	
-	var _assign = __webpack_require__(374);
+	var _extends2 = __webpack_require__(374);
 	
-	var _assign2 = _interopRequireDefault(_assign);
+	var _extends3 = _interopRequireDefault(_extends2);
 	
 	exports.filterAction = filterAction;
+	exports.indexAction = indexAction;
 	exports.default = SetFilter;
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -33884,13 +33647,26 @@
 	    School: "chapter_list3"
 	};
 	
+	var CharacterIndex = exports.CharacterIndex = {
+	    One: "characterList1",
+	    Two: "characterList2",
+	    Three: "characterList3",
+	    Four: "characterList4",
+	    Five: "characterList5"
+	};
+	
 	var initialState = exports.initialState = {
 	    ChapterListFilter: ChapterListFilter.Character,
-	    visible: false
+	    CharacterIndex: CharacterIndex.One
 	};
 	function filterAction(filter) {
 	    return {
 	        type: "SetVisibleFilter", filter: filter
+	    };
+	}
+	function indexAction(filter) {
+	    return {
+	        type: "SetCharacterIndex", filter: filter
 	    };
 	}
 	function SetFilter() {
@@ -33899,8 +33675,13 @@
 	
 	    switch (action.type) {
 	        case "SetVisibleFilter":
-	            console.log('ccccc');
-	            return (0, _assign2.default)({}, state, { ChapterListFilter: action.filter });
+	            return (0, _extends3.default)({}, state, {
+	                ChapterListFilter: action.filter
+	            });
+	        case "SetCharacterIndex":
+	            return (0, _extends3.default)({}, state, {
+	                CharacterIndex: action.filter
+	            });
 	        default:
 	            return state;
 	    }
@@ -33910,26 +33691,54 @@
 /* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(375), __esModule: true };
+	"use strict";
+	
+	exports.__esModule = true;
+	
+	var _assign = __webpack_require__(375);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _assign2.default || function (target) {
+	  for (var i = 1; i < arguments.length; i++) {
+	    var source = arguments[i];
+	
+	    for (var key in source) {
+	      if (Object.prototype.hasOwnProperty.call(source, key)) {
+	        target[key] = source[key];
+	      }
+	    }
+	  }
+	
+	  return target;
+	};
 
 /***/ }),
 /* 375 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(376);
-	module.exports = __webpack_require__(177).Object.assign;
+	module.exports = { "default": __webpack_require__(376), __esModule: true };
 
 /***/ }),
 /* 376 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	// 19.1.3.1 Object.assign(target, source)
-	var $export = __webpack_require__(175);
-	
-	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(377)});
+	__webpack_require__(377);
+	module.exports = __webpack_require__(177).Object.assign;
 
 /***/ }),
 /* 377 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// 19.1.3.1 Object.assign(target, source)
+	var $export = __webpack_require__(175);
+	
+	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(378)});
+
+/***/ }),
+/* 378 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 19.1.2.1 Object.assign(target, source, ...)
@@ -33967,7 +33776,7 @@
 	} : Object.assign;
 
 /***/ }),
-/* 378 */
+/* 379 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33976,154 +33785,187 @@
 	  value: true
 	});
 	
-	var _getPrototypeOf = __webpack_require__(169);
-	
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-	
-	var _classCallCheck2 = __webpack_require__(181);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(182);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(186);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(211);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _CharacterInfo = __webpack_require__(379);
+	var _CharacterInfo = __webpack_require__(380);
 	
 	var _CharacterInfo2 = _interopRequireDefault(_CharacterInfo);
 	
+	var _CharacterBar = __webpack_require__(381);
+	
+	var _CharacterBar2 = _interopRequireDefault(_CharacterBar);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var GameDataCharacter = function (_Component) {
-	  (0, _inherits3.default)(GameDataCharacter, _Component);
+	var GameDataCharacter = function GameDataCharacter(props) {
+	  var action = props.action,
+	      index = props.index,
+	      filter = props.filter;
 	
-	  function GameDataCharacter() {
-	    (0, _classCallCheck3.default)(this, GameDataCharacter);
-	    return (0, _possibleConstructorReturn3.default)(this, (GameDataCharacter.__proto__ || (0, _getPrototypeOf2.default)(GameDataCharacter)).apply(this, arguments));
-	  }
-	
-	  (0, _createClass3.default)(GameDataCharacter, [{
-	    key: 'render',
-	    value: function render() {
-	      var contentInfo = ["傅剑寒|无师自通的剑术奇才，无意中得到一本兵书从其中兵法创出一套剑法，名为杂烩剑法，为人豪迈，讲义气，爱好喝酒。|/assets/src/images/character_2.png", "谷月轩|“辽东大侠”谷云飞之子，逍遥谷第四代大弟子，为人端方斯文，一身正气！因内功精纯，无瑕子多传其拳法功夫！|/assets/src/images/character_3.png", "荆棘|逍遥谷第四代二弟子，个性倨傲，容易冲动!典型的刀子嘴豆腐心！双手分使刀剑，潜力惊人！|/assets/src/images/character_4.png", "水盼盼|峨嵋派弟子，为了寻找丢失的本派武功至宝下山。之前从未与男性打过交道，所以与众人闹出了许多笑话。|/assets/src/images/character_6.png"];
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'data-character' },
-	        _react2.default.createElement(_CharacterInfo2.default, { content: contentInfo })
-	      );
-	    }
-	  }]);
-	  return GameDataCharacter;
-	}(_react.Component);
-	
-	GameDataCharacter.propTypes = {
-	  microdata: _react.PropTypes.object,
-	  mydata: _react.PropTypes.object
+	  var style = filter.indexOf('1') > 0 ? "active" : "";
+	  var contentInfo = ["傅剑寒|无师自通的剑术奇才，无意中得到一本兵书从其中兵法创出一套剑法，名为杂烩剑法，为人豪迈，讲义气，爱好喝酒。|/assets/src/images/character_2.png", "谷月轩|“辽东大侠”谷云飞之子，逍遥谷第四代大弟子，为人端方斯文，一身正气！因内功精纯，无瑕子多传其拳法功夫！|/assets/src/images/character_3.png", "荆棘|逍遥谷第四代二弟子，个性倨傲，容易冲动!典型的刀子嘴豆腐心！双手分使刀剑，潜力惊人！|/assets/src/images/character_4.png", "萧复|在“法外十日”血案中，弦剑山庄唯一的幸存者，之后一心想要揪出幕后凶手，然后复仇！|/assets/src/images/character_5.png", "水盼盼|峨嵋派弟子，为了寻找丢失的本派武功至宝下山。之前从未与男性打过交道，所以与众人闹出了许多笑话。|/assets/src/images/character_6.png"];
+	  return _react2.default.createElement(
+	    'div',
+	    { className: "data-character " + style },
+	    _react2.default.createElement(_CharacterBar2.default, { content: ['', '', '', '', ''], action: action, index: index }),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'character-info' },
+	      _react2.default.createElement(_CharacterInfo2.default, { content: contentInfo[0], count: "1", index: index }),
+	      _react2.default.createElement(_CharacterInfo2.default, { content: contentInfo[1], count: "2", index: index }),
+	      _react2.default.createElement(_CharacterInfo2.default, { content: contentInfo[2], count: "3", index: index }),
+	      _react2.default.createElement(_CharacterInfo2.default, { content: contentInfo[3], count: "4", index: index }),
+	      _react2.default.createElement(_CharacterInfo2.default, { content: contentInfo[4], count: "5", index: index })
+	    )
+	  );
 	};
 	exports.default = GameDataCharacter;
-
-/***/ }),
-/* 379 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _getPrototypeOf = __webpack_require__(169);
-	
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-	
-	var _classCallCheck2 = __webpack_require__(181);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(182);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(186);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(211);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var CharacterInfo = function (_Component) {
-	    (0, _inherits3.default)(CharacterInfo, _Component);
-	
-	    function CharacterInfo() {
-	        (0, _classCallCheck3.default)(this, CharacterInfo);
-	        return (0, _possibleConstructorReturn3.default)(this, (CharacterInfo.__proto__ || (0, _getPrototypeOf2.default)(CharacterInfo)).apply(this, arguments));
-	    }
-	
-	    (0, _createClass3.default)(CharacterInfo, [{
-	        key: "render",
-	        value: function render() {
-	            var content = this.props.content;
-	            var childs = "";
-	            content.map(function (item) {
-	                childs += "<div class=\"character-info-con\">";
-	                childs += "<h3>" + item.split('|')[0] + "</h3>";
-	                childs += "<p>" + item.split('|')[1] + "</p>";
-	                childs += "<a>查看更多+</a>";
-	                childs += "<img src=\"" + item.split('|')[2] + "\"/>";
-	                childs += "</div>";
-	            });
-	            return _react2.default.createElement("div", { className: "character-info", dangerouslySetInnerHTML: { __html: childs } });
-	        }
-	    }]);
-	    return CharacterInfo;
-	}(_react.Component);
-	
-	CharacterInfo.propTypes = {
-	    microdata: _react.PropTypes.object,
-	    mydata: _react.PropTypes.object
-	};
-	exports.default = CharacterInfo;
 
 /***/ }),
 /* 380 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var CharacterInfo = function CharacterInfo(props) {
+	    var content = props.content,
+	        index = props.index,
+	        count = props.count;
+	
+	    content = content.split('|');
+	    var active = index.charAt(index.length - 1) == count ? 'active' : '';
+	    return _react2.default.createElement(
+	        'div',
+	        { className: "character-info-con " + active },
+	        _react2.default.createElement(
+	            'h3',
+	            null,
+	            content[0]
+	        ),
+	        _react2.default.createElement(
+	            'p',
+	            null,
+	            content[1]
+	        ),
+	        _react2.default.createElement(
+	            'a',
+	            null,
+	            '\u67E5\u770B\u66F4\u591A+'
+	        ),
+	        _react2.default.createElement('img', { src: content[2] })
+	    );
+	};
+	exports.default = CharacterInfo;
+
+/***/ }),
+/* 381 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	        value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _UL = __webpack_require__(282);
+	
+	var _UL2 = _interopRequireDefault(_UL);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var CharacterBar = function CharacterBar(props) {
+	        var content = props.content,
+	            action = props.action,
+	            index = props.index;
+	
+	        return _react2.default.createElement(_UL2.default, { key: "character-bar#UL", id: "characterList", filter: index, action: action, content: content, style: "character-bar" });
+	};
+	exports.default = CharacterBar;
+
+/***/ }),
+/* 382 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GameDataStory = function GameDataStory(props) {
+	    var filter = props.filter;
+	
+	    var style = filter.indexOf('2') > 0 ? "active" : "";
+	    return _react2.default.createElement(
+	        'div',
+	        { className: "data-story " + style },
+	        _react2.default.createElement(
+	            'p',
+	            null,
+	            '\u6B66\u6797\u65F6\u81F3\u4E71\u4E16\uFF0C\u4E2D\u539F\u65E2\u6709\u5C11\u6797\uFF0C\u5CE8\u7709\uFF0C\u6B66\u5F53\u7B49\u540D\u95E8\u6B63\u6D3E\uFF0C\u4EA6\u6709\u9146\u90FD\u8FD9\u6837\u7684\u90AA\u6559\u5F02\u7AEF\u3002\u8FD1\u5E74\u5916\u65CF\u52BF\u529B\u5929\u9F99\u6559\u4E5F\u5BF9\u4E2D\u539F\u864E\u89C6\u7708\u7708\u3002'
+	        ),
+	        _react2.default.createElement(
+	            'p',
+	            null,
+	            '\u5728\u5927\u82F1\u96C4\u5C0F\u867E\u7C73\u795E\u79D8\u5931\u8E2A\u540E\u5DF2\u7ECF\u8FC7\u53BB\u4E86100\u591A\u5E74\uFF0C\u6C5F\u6E56\u4E0A\u53C8\u5076\u6709\u52BF\u529B\u76F8\u4E89\uFF0C\u610F\u56FE\u6B66\u6797\u9738\u4E3B\u4E4B\u4F4D\u3002'
+	        ),
+	        _react2.default.createElement(
+	            'p',
+	            null,
+	            '\u6B64\u65F6\uFF0C\u671D\u5EF7\u7A81\u53D1\u300A\u6CD5\u5916\u4E09\u65EC\u300B\u6CD5\u4EE4\uFF0C\u5B98\u5E9C\u5C06\u4E0D\u518D\u8FC7\u95EE\u6C5F\u6E56\u4EC7\u6740\u3002\u4E00\u65F6\u95F4\uFF0C\u5404\u95E8\u5404\u6D3E\u4EBA\u4EBA\u81EA\u5371\uFF0C\u5C60\u6740\u706D\u95E8\u60E8\u6848\u66F4\u662F\u4E3E\u4E0D\u80DC\u4E3E\uFF01'
+	        ),
+	        _react2.default.createElement(
+	            'p',
+	            null,
+	            '\u8C37\u6708\u8F69\u53CA\u8346\u68D8\u5949\u5E08\u5085\u4E4B\u547D\u5916\u51FA\u67E5\u63A2\u6B64\u4E8B\uFF0C\u610F\u5916\u7ED3\u8BC6\u795E\u79D8\u5C11\u5973\u536B\u7D2B\u7EEB\u4E09\u4EBA\u7ED3\u4F34\u4E3A\u89E3\u5F00\u8FD9\u4E00\u5207\u7684\u5E55\u540E\u9ED1\u624B\u800C\u95EF\u8361\u6C5F\u6E56\uFF0C\u6E10\u6E10\u7684\u4ED6\u4EEC\u53D1\u73B0\uFF0C\u8FD9\u5E76\u4E0D\u662F\u7B80\u5355\u7684\u6C5F\u6E56\u4EC7\u6740\uFF0C\u800C\u5728\u8FD9\u4E00\u5207\u7684\u80CC\u540E\uFF0C\u4F3C\u4E4E\u6709\u4E00\u53EA\u5927\u624B\uFF0C\u6B63\u5728\u64CD\u7EB5\u8FD9\u4E00\u5207\uFF01'
+	        )
+	    );
+	};
+	exports.default = GameDataStory;
+
+/***/ }),
+/* 383 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	if (process.env.NODE_ENV === 'production') {
-	  module.exports = __webpack_require__(381);
+	  module.exports = __webpack_require__(384);
 	} else {
-	  module.exports = __webpack_require__(382);
+	  module.exports = __webpack_require__(385);
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 381 */
+/* 384 */
 /***/ (function(module, exports) {
 
 	"use strict";
 
 /***/ }),
-/* 382 */
+/* 385 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';

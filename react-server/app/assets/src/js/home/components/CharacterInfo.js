@@ -1,27 +1,15 @@
-import React, { Component, PropTypes } from 'react';
-
-class CharacterInfo extends Component {
-    static propTypes = {
-        microdata: PropTypes.object,
-        mydata: PropTypes.object,
-    };
-
-    render() {
-        let content = this.props.content;
-        let childs="";
-        content.map(function (item){
-            childs+="<div class=\"character-info-con\">";
-            childs+="<h3>"+item.split('|')[0]+"</h3>";
-            childs+="<p>"+item.split('|')[1]+"</p>";
-            childs+="<a>查看更多+</a>";
-            childs+="<img src=\""+item.split('|')[2]+"\"/>";
-            childs+="</div>";
-        });
+import React, { Component } from 'react';
+const CharacterInfo =(props)=>  {
+        let {content,index,count} = props;
+        content=content.split('|');
+        let active=index.charAt(index.length-1)==count ? 'active':'';
         return (
-            <div className="character-info" dangerouslySetInnerHTML={{__html:childs}}>
+            <div className={"character-info-con "+active}>
+                <h3>{content[0]}</h3>
+                <p>{content[1]}</p>
+                <a>查看更多+</a>
+                <img src={content[2]} />
             </div>
         );
-    }
 }
-
 export default CharacterInfo;

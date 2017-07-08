@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Link, IndexLink } from 'react-router';
 import LI from './LI.js';
-class UL extends Component{
-    render(){
-        let {id,content,filter,action,style}=this.props;
+const UL=(props)=>{
+       let {id,content,filter,action,style}=props;
         let li=[];
         let key=0;
         if(Array.isArray(content)){
@@ -16,10 +14,9 @@ class UL extends Component{
             li.push(<LI key={key++ +id+'$LI'} id={id+key} content={content} filter={filter}  action={action}  />);
         }
         return(
-            <ul  id={id} className={style}>
+            <ul id={id} className={style}>
                 {li}
             </ul>
         );
-    }
 }
 export default UL;

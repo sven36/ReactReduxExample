@@ -1,5 +1,5 @@
 import { render } from 'react-dom';
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import Top from './components/Top.js';
 import Header from './components/Header.js';
 import Category from './components/Category.js';
