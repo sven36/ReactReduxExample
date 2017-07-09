@@ -14,7 +14,7 @@
 
 首先：先看一下项目的结构(如图)：如果你想运行的话需要先在react-server目录npm install服务端JS的依赖包，再在assets目录npm install客户端JS的依赖包，在assets目录运行webpack生成本地JS，再回到react-server目录 执行npm run start 就可以了；
 
-![image](https://github.com/sven36/ReactReduxExample/blob/master/react-server/app/assets/src/images/React.png)
+![image](https://github.com/sven36/ReactReduxExample/blob/master/react-server/app/assets/src/images/React7.png)
 
  
 
