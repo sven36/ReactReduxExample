@@ -5,19 +5,18 @@ import Header from './components/Header.js';
 import Category from './components/Category.js';
 import GameData from './components/GameData.js';
 
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import configureStore from '../redux/configureStore.js';
-const store=configureStore;
-
+const store = configureStore;
 const appEle = document.getElementById('homePage');
 
 render(<Provider store={store}>
-<div className={"container"}>
-    <Top style="nav-top" style2="fl_right" />
-    <Header style="c" />
-    <Category />
-    <GameData />
+    <div className={"container"}>
+        <Top style="nav-top" style2="fl_right" />
+        <Header style="c" />
+        <Category />
+        <GameData />
     </div>
-</Provider>
-, appEle);
+</Provider>, appEle);
+{/* <Header style="c" /><Category /><GameData /> */ }
 

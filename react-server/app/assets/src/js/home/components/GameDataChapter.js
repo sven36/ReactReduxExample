@@ -1,12 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {filterAction,indexAction} from './GameDataChapterRedux';
+import {filterAction,indexAction} from '../homeRedux/GameDataChapterRedux';
 import UL from '../../common/UL.js';
 import GameDataCharacter from './GameDataCharacter.js';
 import GameDataStory from './GameDataStory.js';
 
 class GameDataChapter extends Component {
+  static propTypes={
+    action:PropTypes.func,
+    filter:PropTypes.string
+  }
   render() {
     return (
       <div className="data-chapter">
@@ -21,8 +25,8 @@ class GameDataChapter extends Component {
 }
 
 export default connect(state=>({
- filter:state.ChapterListFilter,
- index:state.CharacterIndex
+ filter:state.gameDataReducer.ChapterListFilter,
+ index:state.gameDataReducer.CharacterIndex
 }), dispatch=>({
    actions:bindActionCreators(filterAction,dispatch),
    setIndex:bindActionCreators(indexAction,dispatch)
