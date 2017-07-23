@@ -62,7 +62,7 @@ const App = () => {
       viewpath: viewpath,             // the root directory of view files
       doctype: '<!DOCTYPE html>',
       extname: '.js',                 // view 层直接渲染文件名后缀
-      beautify: true,                 // 是否需要对 DOM 结构进行格式化
+      beautify: false,                 // 是否需要对 DOM 结构进行格式化
       writeResp: false,               // 是否需要在 view 层直接输出
     },
   }

@@ -29,7 +29,7 @@ class Default extends Component {
           <meta httpEquiv='Cache-Control' content='no-siteapp' />
           <meta name='renderer' content='webkit' />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
-          <link href="../assets/src/css/home/home.css?v=1" rel="stylesheet" />
+          <link href="../assets/src/css/home/home.css" rel="stylesheet" />
           <title>{title}</title>
         </head>
         <body>

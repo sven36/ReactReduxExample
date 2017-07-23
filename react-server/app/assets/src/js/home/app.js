@@ -12,11 +12,9 @@ const appEle = document.getElementById('homePage');
 
 render(<Provider store={store}>
     <div className={"container"}>
-        <Top style="nav-top" style2="fl_right" />
-        <Header style="c" />
+        <Header />
         <Category />
         <GameData />
     </div>
 </Provider>, appEle);
-{/* <Header style="c" /><Category /><GameData /> */ }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-const Header =(props)=> {
+const Header =()=> {
         return(
-            <div id="header" className={props.style}>
+            <div id="header" className={"c"}>
                 <img src="/assets/src/images/logo.png" />
             </div>
         );
