@@ -70,13 +70,16 @@
 	
 	var _reactRedux = __webpack_require__(284);
 	
+	var _redux = __webpack_require__(331);
+	
 	var _configureStore = __webpack_require__(384);
 	
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var store = _configureStore2.default;
+	var initialState = JSON.parse(document.getElementById('initial_data').getAttribute('data-state'));
+	var store = (0, _redux.createStore)(_configureStore2.default, initialState);
 	var appEle = document.getElementById('homePage');
 	
 	(0, _reactDom.render)(_react2.default.createElement(
@@ -26423,6 +26426,8 @@
 	        _this.start = _this.start.bind(_this);
 	        _this.hover = _this.hover.bind(_this);
 	        _this.mouseOut = _this.mouseOut.bind(_this);
+	        _this.throttle = _this.throttle.bind(_this);
+	        _this.hoverThrottle = _this.hoverThrottle.bind(_this);
 	        return _this;
 	    }
 	
@@ -26438,18 +26443,38 @@
 	    }, {
 	        key: 'hover',
 	        value: function hover(e) {
-	            clearInterval(this.intervalId);
-	            var id = 0;
-	            if (e.target && e.target.id) {
-	                id = e.target.id.charAt(0);
+	            this.throttle(this.hoverThrottle, e);
+	        }
+	    }, {
+	        key: 'hoverThrottle',
+	        value: function hoverThrottle(id) {
+	            if (id) {
+	                clearInterval(this.intervalId);
 	                this.props.hoveraction(id);
 	            }
+	        }
+	        //添加一个函数节流防止hover事件过多触发;
+	
+	    }, {
+	        key: 'throttle',
+	        value: function throttle(methord, context) {
+	            clearTimeout(methord.tId);
+	            //React有自己的事件处理机制合成事件(SyntheticEvent)，event调用后被销毁;
+	            //异步使用event应使用event.persist(),这里我们传参数即可；
+	            var id = 0;
+	            if (context.target && context.target.id) {
+	                id = context.target.id.charAt(0);
+	            }
+	            methord.tId = setTimeout(function () {
+	                methord.call(this, id);
+	            }, 500);
 	        }
 	    }, {
 	        key: 'mouseOut',
 	        value: function mouseOut() {
 	            var _this3 = this;
 	
+	            clearInterval(this.intervalId);
 	            this.intervalId = setInterval(function () {
 	                _this3.props.changeAction();
 	            }, 3000);
@@ -34093,7 +34118,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = (0, _redux.createStore)((0, _redux.combineReducers)({ gameDataReducer: _GameDataChapterRedux2.default, categoryReducer: _CategoryRedux2.default }));
+	exports.default = (0, _redux.combineReducers)({ gameDataReducer: _GameDataChapterRedux2.default, categoryReducer: _CategoryRedux2.default });
 
 /***/ })
 /******/ ]);

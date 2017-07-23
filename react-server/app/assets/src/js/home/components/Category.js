@@ -18,6 +18,8 @@ class Category extends Component {
         this.start = this.start.bind(this);
         this.hover = this.hover.bind(this);
         this.mouseOut = this.mouseOut.bind(this);
+        this.throttle = this.throttle.bind(this);
+        this.hoverThrottle = this.hoverThrottle.bind(this);
     }
     start() {
         this.intervalId = setInterval(() => {
@@ -25,14 +27,29 @@ class Category extends Component {
         }, 3000);
     }
     hover(e) {
-        clearInterval(this.intervalId);
-        let id = 0;
-        if (e.target && e.target.id) {
-            id = e.target.id.charAt(0);
+        this.throttle(this.hoverThrottle, e);
+    }
+    hoverThrottle(id) {
+        if (id) {
+            clearInterval(this.intervalId);
             this.props.hoveraction(id);
         }
     }
+    //添加一个函数节流防止hover事件过多触发;
+    throttle(methord, context) {
+        clearTimeout(methord.tId);
+        //React有自己的事件处理机制合成事件(SyntheticEvent)，event调用后被销毁;
+        //异步使用event应使用event.persist(),这里我们传参数即可；
+        let id = 0;
+        if (context.target && context.target.id) {
+            id = context.target.id.charAt(0);
+        }
+        methord.tId = setTimeout(function () {
+            methord.call(this, id);
+        }, 500);
+    }
     mouseOut() {
+        clearInterval(this.intervalId);
         this.intervalId = setInterval(() => {
             this.props.changeAction();
         }, 3000);

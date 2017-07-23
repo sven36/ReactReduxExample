@@ -1,5 +1,6 @@
 import path from 'path';
 import React, { Component, PropTypes } from 'react';
+
 import Top from '../assets/src/js/home/components/Top.js';
 import Header from '../assets/src/js/home/components/Header.js';
 import Category from '../assets/src/js/home/components/Category.js';
@@ -7,8 +8,10 @@ import GameData from '../assets/src/js/home/components/GameData.js';
 import Default from './layout/Default';
 
 import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import configureStore from '../assets/src/js/redux/configureStore';
-const store = configureStore;
+const store = createStore(configureStore);
+const initalState=JSON.stringify(store.getState());
 class Home extends Component {
   static propTypes = {
     microdata: PropTypes.object,
@@ -30,6 +33,7 @@ class Home extends Component {
             </div>
           </Provider>
         </div>
+        <div id="initial_data" data-state={initalState}></div>
       </Default >
     );
   }

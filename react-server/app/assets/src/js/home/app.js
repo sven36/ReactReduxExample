@@ -6,8 +6,10 @@ import Category from './components/Category.js';
 import GameData from './components/GameData.js';
 
 import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import configureStore from '../redux/configureStore.js';
-const store = configureStore;
+const initialState=JSON.parse(document.getElementById('initial_data').getAttribute('data-state'));
+const store =createStore(configureStore,initialState);
 const appEle = document.getElementById('homePage');
 
 render(<Provider store={store}>
