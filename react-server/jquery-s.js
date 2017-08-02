@@ -61,6 +61,7 @@
             this.length = len;
             this.selector = selector || '';
         }
+
         function sId(element) {
             return element._sid || (element._sid = _sid++);
         }
@@ -75,27 +76,27 @@
             //是否包含:
             var isSimpleExpr = /^[\w:]*$/;
             var type = typeof selector;
-            var match,element;
+            var match, element;
             if (type === 'string') {
                 match = rquickExpr.exec(selector);
                 if (match && match[2]) {
                     element = document.getElementById(match[2]);
-                    if(element.id!==match[2]){
+                    if (element.id !== match[2]) {
                         element = rootjQuery.find(selector);
                     }
                     this[0] = element;
                 } else {
-                    try{
+                    try {
                         element = document.querySelectorAll(selector);
                     } catch (e) {
-                        element=rootjQuery.find(selector);
+                        element = rootjQuery.find(selector);
                     }
                 }
             } else if (isFunction(selector)) {
 
             } else {
             }
-            return jQueryS.initFactory(element,selector);
+            return jQueryS.initFactory(element, selector);
         }
         var isArray = Array.isArray || function (obj) {
             return toString.call(obj) === "[object Array]";
@@ -104,7 +105,7 @@
             return typeof obj === 'function';
         }
         jQueryS.extend = function (target, source, deep) {
-            if(!deep){
+            if (!deep) {
                 for (var key in source) {
                     if (!(key in target)) {
                         target[key] = source[key];
@@ -121,7 +122,7 @@
             }
         }
         jQueryS.DOMReady = function (fn) {
-            if(document.addEventListener){
+            if (document.addEventListener) {
                 document.addEventListener('DOMContentLoaded', fn);
                 document.addEventListener('onload', fn);
             }
@@ -135,41 +136,41 @@
         ready.promise = function () {
             try {
                 document.doScroll('left');
-            }catch(e){
+            } catch (e) {
                 setTimeout(arguments.callee, 50);
             }
             done = true;
         }
         ready.promise.done = function (fn) {
-            if(done){
+            if (done) {
                 fn();
             }
         }
 
         jQueryS.event = {
             //add方法用于绑定事件
-            addEvent: function (eventElement,eventType,eventCallback,eventData,eventSelector) {
+            addEvent: function (eventElement, eventType, eventCallback, eventData, eventSelector) {
                 var id = sId(element);
-                if(!eventCallback.guid){
-                    eventCallback.guid =id;
+                if (!eventCallback.guid) {
+                    eventCallback.guid = id;
                 }
             }
-            
+
             //remove方法用于卸载事件
             //dispatch方法用于统一执行用户回调
             //trigger方法用于派发事件
         }
-        $ = function (selector,context) {
+        $ = function (selector, context) {
             return jQueryS.init(selector, context);
         }
         function isArrayLike(obj) {
             var length = !!obj && 'length' in obj && obj.length;
             return length == 0 || (typeof length == 'number' && length > 0 && (length - 1) in obj);
         }
-        jQueryS.each = function (obj, callback) {
+        function each(obj, callback) {
             if (isArrayLike(obj)) {
                 for (var i = 0; i < obj.length; i++) {
-                    if(callback.apply(obj[i])===false) return obj;
+                    if (callback.apply(obj[i]) === false) return obj;
                 }
             } else {
                 for (var key in obj) {
@@ -178,18 +179,97 @@
             }
             return obj;
         }
-        $.each = function (callback) {
-            return jQueryS.each(this, callback);
+        $.fn = {
+            each: function (callback) {
+                if (arguments.length === 2&&typeof arguments[0]==='object') {
+                    //内部调用
+                    return each(arguments[0], arguments[1]);
+                }
+                return each(this, callback);
+            },
+            isArray: isArray,
+            isFunction: isFunction,
+            extend: jQueryS.extend
         }
-        $.isArray = isArray;
-        $.isFunction = isFunction;
-        $.extend = jQueryS.extend;
+        S.prototype = jQueryS.prototype = $.fn;
         return $;
     })();
     //异步模块
     (function ($) {
         function Callbacks(options) {
+            if (typeof options === 'object') {
+                var firing, memory, fired, locked, list = [], queue = [], firingIndex = -1;
+                var fire = function () {
+                    //once为True时事件只允许回调一次，否则可多次重复调用
+                    locked = options.once;
+                    fired = firing = true;
+                    for (; queue.length; firingIndex = -1) {
+                        //保存当前队列要触发的事件到memory，并从当前队列移除;
+                        //queue保存的是要回调函数的作用域对象，和参数数组；
+                        memory = queue.shift();
+                        while (firingIndex++ < list.length) {
+                            //出错的话不会重新尝试而是直接中断并释放内存
+                            if (list[firingIndex].apply(memory[0], memory[1]) == false) {
+                                firingIndex = list.length;
+                                memory = false;
+                            }
+                        }
+                    }
+                    //执行完之后复原firing等状态，并释放list事件队列
+                    //如果locked为false即允许事件反复执行则不必释放
+                    if (!options.memory) {
+                        memory = false;
+                    }
 
+                    firing = false;
+                    if (locked) {
+                        if (memory) {
+                            list = []
+                        } else {
+                            list = '';
+                        }
+                    }
+                }
+                var self = {
+                    //给list添加回调事件队列
+                    addCallback: function () {
+                        if (list) {
+                            if (memory && !firing) {
+                                firingIndex = list.length - 1;
+                                queue.push(memory);
+                            }
+                            (function add(args) {
+                                $.each(args, function (_, arg) {
+                                    if ($.isFunction(arg)) {
+                                        if (!options.unique || !self.has(arg)) {
+                                            list.push(arg);
+                                        }else if(arg&&arg.length&&typeof arg!=='string'){
+                                            add(arg);
+                                        }
+                                    }
+                                })
+                            })(arguments);
+                            if (memory && !firing) {
+                                fire();
+                            }
+                        }
+                        return this;
+                    },
+                    removeCallback: function () {
+                        $.each(arguments, function (_, arg) {
+                            var index;
+                            while (index = list.indexOf(arg) > -1) {
+                                list.splice(index, 1);
+                                if (index < firingIndex) {
+                                    firingIndex--;
+                                }
+                            }
+                        });
+                        return this;
+                    }
+                };
+                return self;
+            }
         }
     })(jQueryS);
     //AJAX模块
@@ -216,8 +296,8 @@
             },
         }
         $.ajax = function (options) {
-            if(typeof options==='object'){
-                var setting = $.extend(options, $.ajaxSettings,true);
+            if (typeof options === 'object') {
+                var setting = $.extend(options, $.ajaxSettings, true);
 
             } else {
                 throw Error('参数应为对象');
