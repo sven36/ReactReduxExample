@@ -189,7 +189,21 @@
             },
             isArray: isArray,
             isFunction: isFunction,
-            extend: jQueryS.extend
+            extend: jQueryS.extend,
+            ArrayIndexOf: function (array,item) {
+                if(isArray(array)&&array.length>0){
+                    if(deletedIds.indexOf){
+                        return deletedIds.indexOf.call(array,item);
+                    } else {
+                        for (var i = 0; i < array.length; i++) {
+                            if(array[i]===item){
+                                return i;
+                            }
+                        }
+                        return -1;
+                    }
+                }
+            }
         }
         S.prototype = jQueryS.prototype = $.fn;
         return $;
@@ -199,7 +213,7 @@
         function Callbacks(options) {
             if (typeof options === 'object') {
                 var firing, memory, fired, locked, list = [], queue = [], firingIndex = -1;
-                var fire = function () {
+                var fireList = function () {
                     //once为True时事件只允许回调一次，否则可多次重复调用
                     locked = options.once;
                     fired = firing = true;
@@ -250,7 +264,7 @@
                                 })
                             })(arguments);
                             if (memory && !firing) {
-                                fire();
+                                fireList();
                             }
                         }
                         return this;
@@ -258,7 +272,7 @@
                     removeCallback: function () {
                         $.each(arguments, function (_, arg) {
                             var index;
-                            while (index = list.indexOf(arg) > -1) {
+                            while (index = $.ArrayIndexOf(list,arg) > -1) {
                                 list.splice(index, 1);
                                 if (index < firingIndex) {
                                     firingIndex--;
@@ -266,17 +280,117 @@
                             }
                         });
                         return this;
+                    },
+                    disable: function () {
+                        locked = queue = [];
+                        list = memory = '';
+                        return this;
+                    },
+                    //把list事件队列的回调方法对应的上下文和参数保存在queue中
+                    fireWith: function (context,args) {
+                        if(!locked){
+                            args = args || [];
+                            args = [context, args.slice ? args.slice() : args];
+                            queue.push(args);
+                            if(!firing){
+                                fireList();
+                            }
+                        }
+                        return this;
+                    },
+                    fire: function () {
+                        self.fireWith(this, arguments);
+                        return this;
+                    },
+                    // To know if the callbacks have already been called at least once
+                    fired: function () {
+                        return !!fired;
                     }
                 };
                 return self;
             }
         }
+        $.Deferred= function (func) {
+            var resolve = {
+                action: 'resolve',//action
+                listener: 'done',//add listerer
+                callback: $.Callbacks({ once: true, memory: true }),//listener list
+                finalState:'resolved'//final state
+            }
+            var reject = {
+                action: 'reject',//action
+                listener: 'fail',//add listerer
+                callback: $.Callbacks({ once: true, memory: true }),//listener list
+                finalState: 'resolved'//final state
+            }
+            var notify = {
+                action: 'notify',//action
+                listener: 'progress',//add listerer
+                callback: $.Callbacks({ memory: true }),//listener list
+            }
+            var deferred = {};
+            var state = 'pending';
+            var promise ={
+                state:function(){
+                    return state;
+                },
+                then: function ( /* fnDone, fnFail, fnProgress */) {
+                    var fns = arguments;
+                    return $.Deferred(thenDeferred).promise();
+                },
+                promise: function (obj) {
+                    return obj != null ? $.extend(obj, promise) : promise;
+                }
+            }
+            promise.pipe = promise.then;
+            function thenDeferred(newDefer) {
+                var def = function (option) {
+                    var fn = typeof fns[i] === 'function' && fns[i];
+                    // deferred[ done | fail | progress ] for forwarding actions to newDefer
+                    deferred[option.listener](function () {
+                        var returned = fn && fn.apply(this, arguments);
+                        if(returned&&typeof returned.promise==='function'){
+                            returned.promise().progress(newDefer.notify).done(newDefer.resolve).fail(newDefer.reject);
+                        } else {
+                            newDefer[option.action + 'With'](this === promise ? newDefer.promise() : this, fn ? [returned] : arguments);
+                        }
+                    });
+                }
+                fns = null;
+                def(resolve);
+                def(reject);
+                def(notify);
+            }
+            function addCallbacks(option) {
+                var list = option.callback;
+                var stateString = option.finalState;
+                var action = option.action;
+                var disable = stateString === 'resolved' ? reject.callback.disable : resolve.callback.disable;
+                promise[action] = list.addCallback;
+                if(stateString){
+                    list.addCallback(function () {
+                        state = stateString;// state = [ resolved | rejected ]
+                    }, disable, notify.callback.lock);// [ reject_list | resolve_list ].disable; progress_list.lock
+                }
+                deferred[option] = function () {
+                    deferred[option + 'With'](this === deferred ? promise : this, arguments);
+                    return this;
+                };
+                deferred[option + 'With'] = list.fireWith;
+            }
+            addCallbacks(resolve);
+            addCallbacks(reject);
+            addCallbacks(notify);
+            promise.promise(deferred);
+            if(func){
+                func.call(deferred, deferred);
+            }
+            return deferred;
+        }
     })(jQueryS);
     //AJAX模块
     (function ($) {
-        function f() {
-
-        }
+        function f() {};
         $.ajaxSettings = {
             type: 'GET',
             beforeSend: f,
@@ -285,6 +399,7 @@
             complete: f,
             context: null,
             crossDomain: false,
+            async:true,
             // MIME types mapping
             // IIS returns Javascript as "application/x-javascript"
             accepts: {
@@ -298,7 +413,15 @@
         $.ajax = function (options) {
             if (typeof options === 'object') {
                 var setting = $.extend(options, $.ajaxSettings, true);
-
+                var callbackContext = setting;
+                var deferred = $.Deferred();
+                var completeDeferred = $.Callbacks({ once: true, memory: true });
+                var jqXHR = {
+                    readyState: 0
+                };
+                deferred.promis(jqXHR).complete = completeDeferred.addCallback;
+                jqXHR.success = jqXHR.done;
+                jqXHR.error = jqXHR.fail;
             } else {
                 throw Error('参数应为对象');
             }
