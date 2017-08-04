@@ -50,9 +50,6 @@
 
         var support = {};
 
-        var _sid = 0;
-
-        jQueryS.cache = {};
 
         var version = '1.0.0';
         function S(dom, selector) {
@@ -62,9 +59,6 @@
             this.selector = selector || '';
         }
 
-        function sId(element) {
-            return element._sid || (element._sid = _sid++);
-        }
         jQueryS.initFactory = function (dom, selector) {
             return new S(dom, selector);
         }
@@ -130,20 +124,6 @@
                 fn();
             }
         }
-
-        jQueryS.event = {
-            //add方法用于绑定事件
-            addEvent: function (eventElement, eventType, eventCallback, eventData, eventSelector) {
-                var id = sId(element);
-                if (!eventCallback.guid) {
-                    eventCallback.guid = id;
-                }
-            }
-
-            //remove方法用于卸载事件
-            //dispatch方法用于统一执行用户回调
-            //trigger方法用于派发事件
-        }
         $ = function (selector, context) {
             return jQueryS.init(selector, context);
         }
@@ -164,6 +144,7 @@
             return obj;
         }
         jQueryS.fn = {
+            expando:'jQueryS' + Math.random().replace(/\D/g, ""),
             extend: function (target, source, deep) {
                 if (!deep) {
                     for (var key in source) {
@@ -206,8 +187,17 @@
                         return -1;
                     }
                 }
+            },
+            isEmptyObject:function(obj){
+                for(var name in obj){
+                    return false;
+                }
+                return true;
             }
         }
+        $.cache = {};
+        $.deletedIds=deletedIds;
+        $.guid=0;
         jQueryS.fn.extend($, jQueryS.fn);
         //$.extend = jQueryS.extend;
         //$.isArray = isArray;
@@ -216,6 +206,7 @@
         S.prototype = jQueryS.prototype = jQueryS.fn;
         return $;
     })();
+
     //异步模块
     (function ($) {
         $.Callbacks= function(options) {
@@ -405,6 +396,139 @@
             return deferred;
         }
     })(jQueryS);
+    //事件模块
+    (function ($) {
+        var _sid = 0;
+        function sId(element) {
+            return element._sid || (element._sid = _sid++);
+        }
+        var event =  {
+            global: {},
+            special: {
+                load: {
+                    noBubble: true// Prevent triggered image.load events from bubbling to window.load
+                },
+                focus: {
+
+                },
+                blur: {
+
+                },
+                click: {
+
+                },
+                beforeunload: {
+
+                }
+            },
+            //add方法用于绑定事件
+            addEvent: function (eventElement, eventType, eventCallback, eventData, eventSelector) {
+                var events,eventHandle,handlers;
+                var nodeType = +eventElement.nodeType || 1;
+                //1为元素节点，9为document
+                if (nodeType === 1 || nodeType === 9) {
+                    var id = sId(eventElement);
+                    if (!eventCallback.guid) {
+                        eventCallback.guid = id;
+                    }
+                    var internalKey = $.expando;
+                    var cache = eventElement.nodeType ? $.cache : eventElement;
+                    var id = eventElement.nodeType ? eventElement[internalKey] : eventElement[internalKey] && internalKey;
+                    if (!id) {
+                        if(eventElement.nodeType){
+                            id = eventElement[internalKey] = $.deletedIds.pop() || $.guid++;
+                        } else {
+                            id = internalKey;
+                        }
+                    }
+                    if(!cache[id]){
+                        cache[id] = {};
+                    }
+                    //每次都取出该元素的事件缓存
+                    var eventCache = cache[id];
+                    if(!eventCallback.guid){
+                        eventCallback.guid = $.guid++;
+                    }
+                    if (!(events = eventCache.events)) {
+                        events = eventCache.events = {};
+                    }
+                    if(!(eventHandle=eventCache.handle)){
+                        eventHandle = eventCache.handle = function (e) {
+                            return typeof $ !== 'undefined' && $.event.dispatch.apply(eventHandle.elem, arguments);
+                        }
+                        eventHandle.elem = eventElement;
+                    }
+                    var special = $.event.special[eventType] || {};
+
+                    var handleInfo = {
+                        eventType: eventType,
+                        guid: eventCallback.guid,
+                        eventData: eventData,
+                        eventSelector: eventSelector
+                    }
+                    if (!(handlers = events[eventType])) {
+                        handlers = events[eventType] = [];
+                        handlers.delegateCount = 0;
+                        if(!special.setup){
+                            if(eventElement.addEventListener){
+                                eventElement.addEventListener(eventType, eventHandle, false);
+                            }else if(eventElement.attachEvent){
+                                eventElement.attachEvent('on' + eventType, eventHandle);
+                            }
+                        }
+                    }
+                    if(special.add){
+                        special.add.call(eventElement, handleInfo);
+                        if(handleInfo.handler.guid){
+                            handleInfo.handler.guid = eventCallback.guid;
+                        }
+                    }
+                    if (!eventSelector) {
+                        handlers.push(handleInfo);
+                    } else {
+
+                    }
+                    // Keep track of which events have ever been used, for event optimization
+                    $.event.global[eventType] = true;
+                }
+                eventElement = null;
+            },
+            //remove方法用于卸载事件
+            removeEvent: function (eventElement, eventType, eventCallback, eventSelector,mappedTypes) {
+                var handleInfo, events;
+                var id = eventElement.nodeType ? eventElement[internalKey] : eventElement[internalKey] && internalKey;
+                if(!id){
+                    return;
+                }
+                var eventCache = cache[id];
+                if(!(events=eventCache.events)){
+                    return
+                }
+                var special = $.event.special[eventType] || {};
+                handlers = events[eventType] || [];
+                handleInfo = handlers[0];
+                if (!eventType && eventType.guid === handleInfo.guid) {
+                    handlers.shift();
+                    if (handleInfo.eventSelector) {
+                        handlers.delegateCount--;
+                    }
+                    if (special.remove) {
+                        special.remove.call(eventElement, handleInfo);
+                    }
+                }
+                if(!handlers.length){
+                    $.removeEvent(eventElement, eventType, eventCache.handle);
+                    delete events[eventType];
+                }
+                if ($.isEmptyObject(events)) {
+                    delete eventCache.handle;
+                    //jQuery._removeData(elem, "events");
+                }
+            }
+            //dispatch方法用于统一执行用户回调
+            //trigger方法用于派发事件
+        }
+    })(jQueryS);
     //AJAX模块
     (function ($) {
         function f() { };
@@ -442,8 +566,12 @@
                 jqXHR.success = jqXHR.done;
                 jqXHR.error = jqXHR.fail;
                 setting.url = setting.replace(/#.*$/, '');
-                setting.dataType = setting.dataType ? setting.dataType[accepts] : '*';
-
+                setting.dataType = setting.dataType ? accepts[setting.dataType.toLowerCase()] : '*';
+                if (!setting.crossDomain) {
+                    var match = /^http(s)?:\/\/(.*?)\//.exec(setting.url);
+                    setting.crossDomain=match ? location.protocol+'//'+location.host+'/' !==(match[0]):false;
+                }
+                var fireGlobals = $.event && s.global;
             } else {
                 throw Error('参数应为对象');
             }
