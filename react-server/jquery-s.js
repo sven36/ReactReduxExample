@@ -402,7 +402,8 @@
         function sId(element) {
             return element._sid || (element._sid = _sid++);
         }
-        var event =  {
+
+        $.event =  {
             global: {},
             special: {
                 load: {
@@ -524,9 +525,51 @@
                     delete eventCache.handle;
                     //jQuery._removeData(elem, "events");
                 }
-            }
-            //dispatch方法用于统一执行用户回调
+            },
             //trigger方法用于派发事件
+            trigger: function (event,data,eventElement,onlyHandlers) {
+                var handle;
+                var type = {}.hasOwnProperty.call(event, 'type') ? event.type : event;
+
+            },
+            //dispatch方法用于统一执行用户回调
+            dispatch: function (event) {
+                var matched,handleInfo;
+                var args = [].slice.call(arguments);
+                var internalKey = $.expando;
+                var cache = eventElement.nodeType ? $.cache : eventElement;
+                var id = eventElement.nodeType ? eventElement[internalKey] : eventElement[internalKey] && internalKey;
+
+                //取出该元素的事件缓存
+                var eventCache = cache[id]['events'][event.type];
+                var special = $.event.special[eventType] || {};
+                event = $.event.fix(event);
+                args[0] = event;
+                event.delegateTarget = this;
+                // 如果存在特殊事件的回调则执行
+                if (special.preDispatch && special.preDispatch.call(this, event) === false) {
+                    return;
+                }
+                handlerQueue = $.event.handleQueue.call(this, event, handlers);
+                var i = j = 0;
+                while ((matched=handlerQueue[i++])) {
+                    event.currentTarget = matched.elem;
+                    while ((handleInfo=matched[j++])) {
+                        event.handleInfo = handleInfo;
+                        event.data = handleInfo.data;
+                        handleInfo.handler.apply(matched.elem, args);
+                    }
+                }
+                return event.result;
+            },
+            handleQueue: function (event, handlers) {
+                var handleQueue = [];
+                var delegateCount = handlers.delegateCount;
+                if(delegateCount<handlers.length){
+                    handleQueue.push({ elem: this, handlers: handlers.slice(delegateCount) });
+                }
+                return handleQueue;
+            }
         }
     })(jQueryS);
     //AJAX模块
