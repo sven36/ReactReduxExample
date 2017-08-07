@@ -144,7 +144,7 @@
             return obj;
         }
         jQueryS.fn = {
-            expando:'jQueryS' + Math.random().replace(/\D/g, ""),
+            expando:'jQueryS' + Math.random().toString().replace(/\D/g, ""),
             extend: function (target, source, deep) {
                 if (!deep) {
                     for (var key in source) {
@@ -197,7 +197,18 @@
         }
         $.cache = {};
         $.deletedIds=deletedIds;
-        $.guid=0;
+        $.guid = 0;
+        jQueryS.each(("blur focus focusin focusout load resize scroll unload click dblclick " +
+    "mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
+    "change select submit keydown keypress keyup error contextmenu").split(" "),
+    function (i, name) {
+        // Handle event binding
+        jQuery.fn[name] = function (data, fn) {
+            return arguments.length > 0 ?
+                this.on(name, null, data, fn) :
+                this.trigger(name);
+        };
+    });
         jQueryS.fn.extend($, jQueryS.fn);
         //$.extend = jQueryS.extend;
         //$.isArray = isArray;
@@ -570,6 +581,9 @@
                 }
                 return handleQueue;
             }
+        }
+        $.on = function (elem,type) {
+
         }
     })(jQueryS);
     //AJAX模块
