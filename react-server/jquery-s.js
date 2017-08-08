@@ -198,15 +198,15 @@
         $.cache = {};
         $.deletedIds=deletedIds;
         $.guid = 0;
-        jQueryS.each(("blur focus focusin focusout load resize scroll unload click dblclick " +
+        jQueryS.fn.each(("blur focus focusin focusout load resize scroll unload click dblclick " +
     "mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
     "change select submit keydown keypress keyup error contextmenu").split(" "),
     function (i, name) {
         // Handle event binding
-        jQuery.fn[name] = function (data, fn) {
+        jQueryS.fn[name] = function (data, fn) {
             return arguments.length > 0 ?
-                this.on(name, null, data, fn) :
-                this.trigger(name);
+               $.on.call(this,name,data,fn) :
+                $.event.trigger.call(this, name);
         };
     });
         jQueryS.fn.extend($, jQueryS.fn);
@@ -582,8 +582,13 @@
                 return handleQueue;
             }
         }
-        $.on = function (elem,type) {
-
+        $.on = function (type,callback) {
+            var elem = this;
+            if (callback) {
+                for (var i = 0; i < elem.length;i++){
+                    $.event.addEvent(elem[i], type, callback);
+                }
+            }
         }
     })(jQueryS);
     //AJAX模块
