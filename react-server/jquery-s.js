@@ -193,6 +193,14 @@
                     return false;
                 }
                 return true;
+            },
+            on:function (type,callback) {
+                var elem = this;
+                if (callback) {
+                    for (var i = 0; i < elem.length;i++){
+                        $.event.addEvent(elem[i], type, callback);
+                    }
+                }
             }
         }
         $.cache = {};
@@ -476,7 +484,8 @@
                         eventType: eventType,
                         guid: eventCallback.guid,
                         eventData: eventData,
-                        eventSelector: eventSelector
+                        eventSelector: eventSelector,
+                        eventCallback:eventCallback
                     }
                     if (!(handlers = events[eventType])) {
                         handlers = events[eventType] = [];
@@ -566,10 +575,10 @@
                 var i = j = 0;
                 while ((matched=handlerQueue[i++])) {
                     event.currentTarget = matched.elem;
-                    while ((handleInfo=matched[j++])) {
+                    while ((handleInfo = matched.handlers[j++])) {
                         event.handleInfo = handleInfo;
-                        event.data = handleInfo.data;
-                        handleInfo.handler.apply(matched.elem, args);
+                        event.data = handleInfo.eventData;
+                        handleInfo.eventCallback.apply(matched.elem, args);
                     }
                 }
                 return event.result;
@@ -601,14 +610,7 @@
                 return event;
             }
         }
-        $.on = function (type,callback) {
-            var elem = this;
-            if (callback) {
-                for (var i = 0; i < elem.length;i++){
-                    $.event.addEvent(elem[i], type, callback);
-                }
-            }
-        }
+
     })(jQueryS);
     //AJAX模块
     (function ($) {
@@ -625,6 +627,7 @@
 
 
         }
+        $.ajaxActive = 0;//目前正在运行的ajax个数
         // MIME types mapping
         // IIS returns Javascript as "application/x-javascript"
         var accepts= {
@@ -633,6 +636,10 @@
                 xml: 'application/xml, text/xml',
                 html: 'text/html',
                 text: 'text/plain'
+        }
+        var requestHeader = {};
+        function setRequestHeader(name,value) {
+            requestHeader[name] = value;
         }
         $.ajax = function (options) {
             if (typeof options === 'object') {
@@ -646,13 +653,19 @@
                 deferred.promise(jqXHR).complete = completeDeferred.addCallback;
                 jqXHR.success = jqXHR.done;
                 jqXHR.error = jqXHR.fail;
-                setting.url = setting.replace(/#.*$/, '');
+                setting.url = setting.url.replace(/#.*$/, '');
+                setting.type = setting.type.toUpperCase();
                 setting.dataType = setting.dataType ? accepts[setting.dataType.toLowerCase()] : '*';
                 if (!setting.crossDomain) {
                     var match = /^http(s)?:\/\/(.*?)\//.exec(setting.url);
                     setting.crossDomain=match ? location.protocol+'//'+location.host+'/' !==(match[0]):false;
                 }
-                var fireGlobals = $.event && s.global;
+                var fireGlobals = $.event;//&& setting.global
+                if (fireGlobals && $.ajaxActive++ === 0) {
+                    $.event.trigger('ajaxStart');
+                }
+                var cacheURL = setting.url;
+
             } else {
                 throw Error('参数应为对象');
             }
