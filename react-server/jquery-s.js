@@ -548,20 +548,21 @@
                 var matched,handleInfo;
                 var args = [].slice.call(arguments);
                 var internalKey = $.expando;
+                var eventElement = this || {};
                 var cache = eventElement.nodeType ? $.cache : eventElement;
                 var id = eventElement.nodeType ? eventElement[internalKey] : eventElement[internalKey] && internalKey;
 
                 //取出该元素的事件缓存
                 var eventCache = cache[id]['events'][event.type];
-                var special = $.event.special[eventType] || {};
-                event = $.event.fix(event);
+                var special = $.event.special[event.type] || {};
+                event = $.event.fix.call(eventElement,event);
                 args[0] = event;
                 event.delegateTarget = this;
                 // 如果存在特殊事件的回调则执行
                 if (special.preDispatch && special.preDispatch.call(this, event) === false) {
                     return;
                 }
-                handlerQueue = $.event.handleQueue.call(this, event, handlers);
+                handlerQueue = $.event.handleQueue.call(this, event, eventCache);
                 var i = j = 0;
                 while ((matched=handlerQueue[i++])) {
                     event.currentTarget = matched.elem;
@@ -580,6 +581,24 @@
                     handleQueue.push({ elem: this, handlers: handlers.slice(delegateCount) });
                 }
                 return handleQueue;
+            },
+            fix: function (event) {
+                if (event[$.expando]) {
+                    return event;
+                }
+                var type = event.type;
+                // Support: IE<9
+                if(!event.target){
+                    event.target = event.srcElement || this;
+                }
+                // Support: Safari 6-8+
+                // Target should not be a text node (#504, #13143)
+                if (event.target.nodeType === 3) {
+                    event.target = event.target.parentNode;
+                }
+                //防止同一元素同一事件多次绑定
+                event[$.expando] = true;
+                return event;
             }
         }
         $.on = function (type,callback) {
