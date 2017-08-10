@@ -624,7 +624,7 @@
             context: null,
             crossDomain: false,
             async: true,
-
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8'
 
         }
         $.ajaxActive = 0;//目前正在运行的ajax个数
@@ -640,6 +640,15 @@
         var requestHeader = {};
         function setRequestHeader(name,value) {
             requestHeader[name] = value;
+        }
+        function param(parameter) {
+            if (typeof parameter === 'object') {
+                var res = '';
+                for(var key in parameter){
+                    res+=key+'='+parameter[key]+'&';
+                }
+                return res;
+            }
         }
         $.ajax = function (options) {
             if (typeof options === 'object') {
@@ -665,6 +674,11 @@
                     $.event.trigger('ajaxStart');
                 }
                 var cacheURL = setting.url;
+                if(setting.data){
+                    setting.data = param(setting.data);
+                    setting.url += '?' + setting.data;
+                }
+                var isPost = /^(?:GET|HEAD)$/g.test(setting.type.toUpperCase());
 
             } else {
                 throw Error('参数应为对象');
