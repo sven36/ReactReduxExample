@@ -331,7 +331,7 @@
                             list = memory = '';
                             return this;
                         }
-                    return this;
+                        return this;
                     }
                 };
                 return self;
@@ -630,12 +630,12 @@
         $.ajaxActive = 0;//目前正在运行的ajax个数
         // MIME types mapping
         // IIS returns Javascript as "application/x-javascript"
-        var accepts= {
-                script: 'text/javascript, application/javascript, application/x-javascript',
-                json: 'application/json',
-                xml: 'application/xml, text/xml',
-                html: 'text/html',
-                text: 'text/plain'
+        var accepts = {
+            script: 'text/javascript, application/javascript, application/x-javascript',
+            json: 'application/json',
+            xml: 'application/xml, text/xml',
+            html: 'text/html',
+            text: 'text/plain'
         }
         var requestHeader = {};
         function setRequestHeader(name,value) {
@@ -673,13 +673,23 @@
                 if (fireGlobals && $.ajaxActive++ === 0) {
                     $.event.trigger('ajaxStart');
                 }
-                var cacheURL = setting.url;
                 if(setting.data){
                     setting.data = param(setting.data);
-                    setting.url += '?' + setting.data;
                 }
-                var isPost = /^(?:GET|HEAD)$/g.test(setting.type.toUpperCase());
-
+                var isPost = /^(?:GET|HEAD)$/g.test(setting.type.toUpperCase());//?:表示进行不贪婪匹配
+                var cacheURL = setting.url;
+                if (!isPost) {
+                    cacheURL += /\?/.test(setting.url) ? '&' : '?' + setting.data;
+                    delete setting.data;
+                }
+                if(setting.data&&isPost){
+                    setRequestHeader('Content-Type', setting.contentType);
+                }
+                var dataType = setting.dataType ? accepts[setting.dataType] : '*/*';
+                setRequestHeader('Accept',dataType);
+                jqXHR.success(setting.success);
+                jqXHR.error(setting.error);
+                jqXHR.complete(setting.complete);
             } else {
                 throw Error('参数应为对象');
             }
