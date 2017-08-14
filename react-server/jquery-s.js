@@ -421,7 +421,18 @@
         function sId(element) {
             return element._sid || (element._sid = _sid++);
         }
+        $.Event = function (src,props) {
+            if(src&&src.type){
 
+            } else {//自定义事件
+                this.type = src;
+            }
+            if(props){
+                $.extend(this.props);
+            }
+            this.timeStamp = src && src.timeStamp || +(new Date);
+            this[$.expando] = true;
+        }
         $.event =  {
             global: {},
             special: {
@@ -550,7 +561,13 @@
             trigger: function (event,data,eventElement,onlyHandlers) {
                 var handle;
                 var type = {}.hasOwnProperty.call(event, 'type') ? event.type : event;
+                var eventTarget = eventElement || document;
+                //判断是系统事件还是自定义事件
+                event = event[$.expando] ? event : new $.Event(event, typeof event === "object" && event);
 
+                if(!event.target){
+                    event.target = eventTarget;
+                }
             },
             //dispatch方法用于统一执行用户回调
             dispatch: function (event) {
@@ -650,6 +667,89 @@
                 return res;
             }
         }
+        function standardXHR() {
+            return new window.XMLHttpRequest();
+        }
+        function activeXHR() {
+            return new window.ActiveXObject('Microsoft.XMLHTTP');
+        }
+        $.ajaxSettings.xhr = window.XMLHttpRequest ? standardXHR : activeXHR;
+        var xhrSupported = $.ajaxSettings.xhr();
+        //允许cookie跨域
+        var corsSupported = !!xhrSupported && ("withCredentials" in xhrSupported);
+        var transports;
+        if(xhrSupported){
+            transports = {
+                send: function (options, headers) {
+                    var xhr = xhrSupported;
+                    xhr.open(options.type, options.url, options.async);
+                    if(!options.crossDomain&&!headers['X-Requested-With']){
+                        headers['X-Requested-With'] = 'XMLHttpRequest';
+                    }
+                    for (i in headers) {
+                        // Support: IE<9
+                        // IE's ActiveXObject throws a 'Type Mismatch' exception when setting
+                        // request header to a null-value.
+                        //
+                        // To keep consistent with other XHR implementations, cast the value
+                        // to string and ignore `undefined`.
+                        if (headers[i] !== undefined) {
+                            setRequestHeader(i, headers[i] + "");
+                        }
+                    }
+                    xhr.send((options.isPost && options.data) || null);
+                    var callback = function (isAbort) {
+                        var status, statusText, responses;
+                        if (callback && (isAbort || xhr.readyState === 4)) {
+                            callback = undefined;
+                            xhr.onreadystatechange = f;
+                            if(!isAbort){
+                                status = xhr.status;
+                                responses = {};
+
+                                // Support: IE<10
+                                // Accessing binary-data responseText throws an exception
+                                if(typeof xhr.responseText==='string'){
+                                    responses.text = xhr.responseText;
+                                }
+                                // Firefox throws an exception when accessing
+                                // statusText for faulty cross-domain requests
+                                try{
+                                    statusText=xhr.statusText;
+                                } catch (e) {
+                                    statusText = '';
+                                }
+
+                                // If the request is local and we have data: assume a success
+                                // (success with no data won't get notified, that's the best we
+                                // can do given current implementations)
+                                if(!status&&!options.crossDomain){
+                                    status = responses.text ? 200 : 204;
+                                    // IE - #1450: sometimes returns 1223 when it should be 204
+                                } else if (status === 1223) {
+                                    status = 204;
+                                }
+
+                            } else {
+                                if(xhr.readyState!==4){
+                                    xhr.abort();
+                                }
+                            }
+                        }
+                        if(responses){
+                            complete(status, statusText, responses);
+                        }
+                    }
+
+                    if (options.async) {
+                        xhr.onreadystatechange = callback;
+                    }
+                    else {
+                        callback();
+                    }
+                }
+            }
+        }
         $.ajax = function (options) {
             if (typeof options === 'object') {
                 var setting = $.extend(options, $.ajaxSettings, true);
@@ -690,6 +790,11 @@
                 jqXHR.success(setting.success);
                 jqXHR.error(setting.error);
                 jqXHR.complete(setting.complete);
+
+                if(fireGlobals){
+                    fireGlobals.trigger('ajaxSend', [jqXHR, setting]);
+
+                }
             } else {
                 throw Error('参数应为对象');
             }
