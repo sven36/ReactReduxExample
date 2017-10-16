@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const VERSION = require('./package.json').version;
+// const webpack = require('html-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const getModulePath = function(name) {
   return path.join(__dirname, 'node_modules', name);
@@ -34,6 +36,10 @@ module.exports = [{
   },
 
   plugins: [
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoErrorsPlugin(),    new HtmlWebpackPlugin(),
+		new webpack.DllReferencePlugin({
+			manifest: require("./build/manifest.json"), // eslint-disable-line
+      context: __dirname,
+		}),
   ],
 }];

@@ -6,7 +6,7 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "babel": "~6.3.26",
+    "babel": "^6.23.0",
     "babel-core": "~6.4.5",
     "babel-plugin-import-asserts": "~2.1.0",
     "babel-plugin-transform-export-extensions": "~6.4.0",
@@ -36,5 +36,8 @@
     "should": "~8.2.0",
     "supertest": "~1.1.0",
     "utility": "~1.6.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
   }
 }
