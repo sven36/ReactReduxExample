@@ -2,12 +2,12 @@ const koa = require('koa');
 const koaRouter = require('koa-router');
 const path = require('path');
 const reactview = require('./app/plugin/reactview/app.js');
-const Static = require('./app/middleware/static.js');
 const VERSION = require('./app/assets/package.json').version;
-const https=require('https');
-const querystring=require('querystring');
-const crypto = require('crypto');
-const fs = require('fs');
+//const Static = require('./app/middleware/static.js');
+//const https=require('https');
+//const querystring=require('querystring');
+//const crypto = require('crypto');
+//const fs = require('fs');
 
 const App = () => {
   let app = koa();
@@ -45,14 +45,14 @@ const App = () => {
   app.use(router.routes()).use(router.allowedMethods());
 
   // 静态资源托管
-  app.use(Static({
+  /*app.use(Static({
     staticOpts: {
       router: '/assets',               // 路由映射
       dir: `${__dirname}/app/assets`,  // 托管的目录
       maxage: 0,        // 设置 maxage，默认缓存一天
     },
     app: app,
-  }));
+  }));*/
 
   // 注入 reactview
   const viewpath = path.join(__dirname, 'app/views');
