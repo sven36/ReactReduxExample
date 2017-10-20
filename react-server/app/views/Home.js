@@ -1,5 +1,5 @@
 import path from 'path';
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 import Top from '../assets/src/js/home/components/Top.js';
 import Header from '../assets/src/js/home/components/Header.js';
@@ -13,17 +13,11 @@ import configureStore from '../assets/src/js/redux/configureStore';
 const store = createStore(configureStore);
 const initalState=JSON.stringify(store.getState());
 class Home extends Component {
-  static propTypes = {
-    microdata: PropTypes.object,
-    mydata: PropTypes.object,
-  };
+
   render() {
-    const { microdata, mydata } = this.props;
-    let homeJs = `${microdata.styleDomain}build/${microdata.styleVersion}/home.js`;
-    let scriptUrls = [homeJs];
 
     return (
-      <Default microdata={microdata} scriptUrls={scriptUrls} title={"侠客风云传前传"}>
+      <Default  title={"侠客风云传前传"}>
         <div id="homePage">
           <Provider store={store}>
             <div className={"container"}>

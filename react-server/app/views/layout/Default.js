@@ -1,26 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React ,{Component} from 'react';
 
-class Default extends Component {
-  static propTypes = {
-    microdata: PropTypes.object,
-    children: PropTypes.object,
-    title: PropTypes.string,
-    scriptUrls: PropTypes.array,
-  };
-  renderScripts() {
-    const {scriptUrls} = this.props;
-    let items = [];
-
-    scriptUrls.map((url, i) => {
-      items.push(<script key={i} src={url} />);
-    });
-
-    return items;
-  }
+class Default extends Component{
 
   render() {
-    const { microdata, title, children } = this.props;
-
+    let { children, title } = this.props;
     return (
       <html>
         <head>
@@ -34,7 +17,7 @@ class Default extends Component {
         </head>
         <body>
           {children}
-          {this.renderScripts()}
+          <script src="/assets/build/1.0.0/home.js"></script>
         </body>
       </html>
     );
