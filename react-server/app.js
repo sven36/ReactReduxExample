@@ -13,7 +13,7 @@ const App = () => {
   let app = koa();
   let router = koaRouter();
   let microdata = {
-    styleDomain: "//localhost:3000/assets/",
+    styleDomain: "/assets/",
     styleVersion: VERSION,
   };
 
